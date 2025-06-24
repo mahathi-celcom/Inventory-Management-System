@@ -30,9 +30,9 @@ public interface AssetPORepository extends JpaRepository<AssetPO, Long> {
     
     // Removed filtering methods - use frontend filtering instead
     
-    // Leases expiring soon (updated without status condition)
-    @Query("SELECT a FROM AssetPO a WHERE a.acquisitionType = 'Leased' AND a.leaseEndDate BETWEEN :startDate AND :endDate")
-    List<AssetPO> findLeasesExpiringBetween(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+    // Rented items expiring soon (updated to use 'Rented' instead of 'Leased')
+    @Query("SELECT a FROM AssetPO a WHERE a.acquisitionType = 'Rented' AND a.leaseEndDate BETWEEN :startDate AND :endDate")
+    List<AssetPO> findRentalsExpiringBetween(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
     
     // Removed complex filtering query - use frontend filtering instead
     

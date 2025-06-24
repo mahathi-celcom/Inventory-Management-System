@@ -102,7 +102,7 @@ filteredAssets = allAssets.filter(asset => {
          (!filters.modelName || asset.modelName === filters.modelName) &&
          (!filters.currentUserName || asset.currentUserName === filters.currentUserName) &&
          (!filters.osName || asset.osName === filters.osName) &&
-         (!filters.vendorName || asset.vendorName === filters.vendorName) &&
+         (!filters.name || asset.name === filters.name) &&
          (!filters.ownerType || asset.ownerType === filters.ownerType) &&
          (dateRangeValidation);
 });

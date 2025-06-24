@@ -1,0 +1,229 @@
+<div class="space-y-6">
+  <form [formGroup]="assetModelForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        <!-- Asset Type and Make Selection - Horizontal Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Asset Type Selection -->
+    <div>
+      <label for="typeId" class="form-celcom-label">
+        Asset Type *
+      </label>
+      <div class="flex">
+        <select
+          id="typeId"
+          formControlName="typeId"
+          class="form-celcom-select flex-1 rounded-l-md rounded-r-none"
+          [class.form-celcom-input-error]="isFieldInvalid('typeId')"
+        >
+          <option value="">Select Asset Type</option>
+          <option *ngFor="let type of assetTypes" [value]="type.id">
+            {{ type.name }}
+          </option>
+        </select>
+        <button
+          type="button"
+          (click)="onAddAssetType()"
+          class="btn-celcom-icon px-3 py-2 border border-l-0 border-r-0 border-gray-300 rounded-none"
+          title="Add Asset Type"
+        >
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          (click)="onEditAssetType()"
+          [disabled]="!assetModelForm.get('typeId')?.value || assetModelForm.get('typeId')?.value === ''"
+          class="btn-celcom-icon px-3 py-2 border border-l-0 border-r-0 border-gray-300 rounded-none disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-400"
+          title="Edit Selected Asset Type"
+        >
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+          </svg>
+        </button>
+        <button
+          type="button"
+          (click)="onDeleteAssetType()"
+          [disabled]="!assetModelForm.get('typeId')?.value || assetModelForm.get('typeId')?.value === ''"
+          class="btn-celcom-icon-danger px-3 py-2 border border-l-0 border-gray-300 rounded-r-md disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-400"
+          title="Delete Selected Asset Type"
+        >
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+          </svg>
+        </button>
+      </div>
+      <div *ngIf="isFieldInvalid('typeId')" class="form-celcom-error">
+        {{ getFieldError('typeId') }}
+      </div>
+    </div>
+
+    <!-- Asset Make Selection -->
+    <div>
+      <label for="makeId" class="block text-sm font-medium text-celcom-text mb-2">
+        Asset Make *
+      </label>
+      <div class="flex">
+        <select
+          id="makeId"
+          formControlName="makeId"
+          class="flex-1 block w-full px-3 py-2 border border-gray-300 rounded-l-md shadow-sm focus:outline-none focus:ring-1 focus:ring-celcom-accent focus:border-celcom-accent transition-colors"
+          [class.border-celcom-primary]="isFieldInvalid('makeId')"
+          [disabled]="filteredMakes.length === 0"
+        >
+          <option value="">{{ filteredMakes.length === 0 ? 'Select Asset Type first' : 'Select Asset Make' }}</option>
+          <option *ngFor="let make of filteredMakes" [value]="make.id">
+            {{ make.name }}
+          </option>
+        </select>
+        <button
+          type="button"
+          (click)="onAddAssetMake()"
+          [disabled]="!assetModelForm.get('typeId')?.value"
+          class="inline-flex items-center px-3 py-2 border border-l-0 border-r-0 border-gray-300 bg-celcom-accent/5 text-celcom-accent hover:bg-celcom-accent/10 focus:outline-none focus:ring-1 focus:ring-celcom-accent disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          title="Add Asset Make"
+        >
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          (click)="onEditAssetMake()"
+          [disabled]="!assetModelForm.get('makeId')?.value || assetModelForm.get('makeId')?.value === '' || filteredMakes.length === 0"
+          class="inline-flex items-center px-3 py-2 border border-l-0 border-r-0 border-gray-300 bg-blue-500/5 text-blue-600 hover:bg-blue-500/10 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-400 transition-colors"
+          title="Edit Selected Asset Make"
+        >
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+          </svg>
+        </button>
+        <button
+          type="button"
+          (click)="onDeleteAssetMake()"
+          [disabled]="!assetModelForm.get('makeId')?.value || assetModelForm.get('makeId')?.value === '' || filteredMakes.length === 0"
+          class="inline-flex items-center px-3 py-2 border border-l-0 border-gray-300 rounded-r-md bg-celcom-primary/5 text-celcom-primary hover:bg-celcom-primary/10 focus:outline-none focus:ring-1 focus:ring-celcom-primary disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-400 transition-colors"
+          title="Delete Selected Asset Make"
+        >
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+          </svg>
+        </button>
+      </div>
+      <div *ngIf="isFieldInvalid('makeId')" class="mt-1 text-sm text-celcom-primary">
+        {{ getFieldError('makeId') }}
+            </div>
+      </div>
+    </div>
+
+        <!-- Model Name - Full Width -->
+    <div>
+      <label for="name" class="block text-sm font-medium text-celcom-text mb-2">
+        Model Name *
+      </label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        placeholder="e.g., MacBook Pro 16&quot;, OptiPlex 7090"
+        class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-celcom-accent focus:border-celcom-accent transition-colors"
+        [class.border-celcom-primary]="isFieldInvalid('name')"
+      />
+      <div *ngIf="isFieldInvalid('name')" class="mt-1 text-sm text-celcom-primary">
+        {{ getFieldError('name') }}
+      </div>
+    </div>
+
+        <!-- Technical Specifications - Four Column Layout -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- RAM -->
+      <div>
+        <label for="ram" class="block text-sm font-medium text-celcom-text mb-2">
+          RAM
+        </label>
+        <input
+          type="text"
+          id="ram"
+          formControlName="ram"
+          placeholder="e.g., 16GB, 32GB"
+          class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-celcom-accent focus:border-celcom-accent transition-colors"
+        />
+      </div>
+
+      <!-- Storage -->
+      <div>
+        <label for="storage" class="block text-sm font-medium text-celcom-text mb-2">
+          Storage
+        </label>
+        <input
+          type="text"
+          id="storage"
+          formControlName="storage"
+          placeholder="e.g., 512GB SSD, 1TB HDD"
+          class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-celcom-accent focus:border-celcom-accent transition-colors"
+        />
+      </div>
+
+      <!-- Processor -->
+      <div>
+        <label for="processor" class="block text-sm font-medium text-celcom-text mb-2">
+          Processor
+        </label>
+        <input
+          type="text"
+          id="processor"
+          formControlName="processor"
+          placeholder="e.g., Intel i7-11700, M2 Pro"
+          class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-celcom-accent focus:border-celcom-accent transition-colors"
+        />
+      </div>
+
+      <!-- Status -->
+      <div>
+        <label for="status" class="block text-sm font-medium text-celcom-text mb-2">
+          Status *
+        </label>
+        <select
+          id="status"
+          formControlName="status"
+          class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-celcom-accent focus:border-celcom-accent transition-colors"
+          [class.border-celcom-primary]="isFieldInvalid('status')"
+        >
+          <option value="">Select Status</option>
+          <option value="Active">🟢 Active</option>
+          <option value="Inactive">🔴 Inactive</option>
+          <option value="Not For Buying">🟡 Not For Buying</option>
+        </select>
+        <div *ngIf="isFieldInvalid('status')" class="mt-1 text-sm text-celcom-primary">
+          {{ getFieldError('status') }}
+        </div>
+      </div>
+    </div>
+
+        <!-- Form Actions - Bottom Right Alignment -->
+        <div class="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+      <button
+        type="button"
+        (click)="onCancel()"
+            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
+      >
+        Cancel
+      </button>
+      <button
+        type="submit"
+        [disabled]="isSubmitting || assetModelForm.invalid"
+            class="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-pink-500 to-purple-600 border border-transparent rounded-md shadow-sm hover:from-pink-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+      >
+        <span *ngIf="isSubmitting" class="inline-flex items-center">
+          <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          {{ isEditMode ? 'Updating...' : 'Creating...' }}
+        </span>
+        <span *ngIf="!isSubmitting">
+          {{ isEditMode ? 'Update Model' : 'Create Model' }}
+        </span>
+      </button>
+    </div>
+  </form>
+</div> 

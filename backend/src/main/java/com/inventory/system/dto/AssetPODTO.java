@@ -19,7 +19,6 @@ public class AssetPODTO {
     private Long id;
     
     @NotBlank(message = "Acquisition type is required")
-    @Pattern(regexp = "^(Bought|Leased|Rented)$", message = "Acquisition type must be: Bought, Leased, or Rented")
     private String acquisitionType;
     
     @NotBlank(message = "PO Number is required")

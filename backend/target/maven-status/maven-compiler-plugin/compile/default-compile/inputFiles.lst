@@ -1,137 +1,137 @@
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetModelDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\exception\ResourceNotFoundException.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\impl\AssetMakeServiceImpl.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\controller\OSController.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetUserAssignmentDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\repository\AssetTagAssignmentRepository.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\OSVersionService.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\validation\AssetValidationService.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\impl\AssetTypeServiceImpl.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetAssignmentHistoryDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\impl\OSServiceImpl.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\impl\AssetModelServiceImpl.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\model\AssetType.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\controller\AssetModelController.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\model\OS.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetTagDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\controller\AssetController.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\PODeletionConflictDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\exception\ConflictException.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetPOMigrationResponse.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\model\OSVersion.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\mapper\AssetTypeMapper.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\model\AssetStatusHistory.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\repository\AssetTypeRepository.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetModelDetailsDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetUpdateDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\impl\AssetTagAssignmentServiceImpl.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\UserService.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetTypeDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\ErrorResponse.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\model\User.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\VendorDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\exception\ErrorResponse.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\model\AssetModel.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetAnalyticsSummaryDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\impl\UserServiceImpl.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\controller\AssetTagController.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\AssetModelService.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\repository\AssetTagRepository.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\config\BasicAuthenticationConfig.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\PODeletionWarningDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\controller\AssetMakeController.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\model\AssetTagAssignmentId.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\controller\OSVersionController.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetIndividualUpdateDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\OSService.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\impl\AuditLogServiceImpl.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\BaseDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\AssetAssignmentManagementService.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\AssetTagAssignmentService.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\repository\BaseRepository.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\repository\AssetModelRepository.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\VendorService.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\model\AssetPO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetStatusHistoryDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\model\Vendor.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\impl\AssetStatusHistoryServiceImpl.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\repository\AssetAssignmentHistoryRepository.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\repository\AssetAnalyticsRepository.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\mapper\AssetMapper.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetTagAssignmentRequestDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\controller\AssetStatusHistoryController.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetDeletionBlockerDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\model\AssetTag.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\impl\AssetPOServiceImpl.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\OSVersionDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\model\AssetTagAssignment.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\repository\AssetMakeRepository.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\repository\UserRepository.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\config\CorsTestController.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetRequestDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\AssetStatusHistoryService.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\AuditLogService.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\PageResponse.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\repository\AssetRepository.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\config\ValidationConfig.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\controller\VendorController.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\controller\AssetAnalyticsController.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\UserDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\validation\AssetRequestValidator.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\impl\AssetAssignmentHistoryServiceImpl.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetDashboardDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\controller\AssetAssignmentManagementController.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\exception\handler\GlobalExceptionHandler.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AuditLogDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\BulkAssetResponse.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\repository\OSRepository.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetMakeDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\impl\AssetAnalyticsServiceImpl.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\impl\AssetTagServiceImpl.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetBulkUpdateDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\mapper\AssetPOMapper.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetPODTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetTagAssignmentDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\BulkAssetByPOResponse.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\model\AuditLog.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\repository\OSVersionRepository.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\BulkUpdateResponse.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\controller\CustomErrorController.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\controller\UserController.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\mapper\VendorMapper.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\repository\AssetStatusHistoryRepository.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\repository\VendorRepository.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\AssetTypeService.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetPOUpdateResponse.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\controller\AssetAssignmentHistoryController.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssignmentResponseDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\repository\AssetPORepository.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\OSDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\model\BaseEntity.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\InventoryManagementApplication.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\enums\EntityStatus.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\config\SecurityConfig.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetReportDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\controller\AssetTypeController.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\POSummaryDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\impl\OSVersionServiceImpl.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\BulkAssetByPORequest.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\impl\VendorServiceImpl.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\config\WebConfig.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\model\AssetAssignmentHistory.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\AssetAssignmentHistoryService.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\AssetPOService.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\dto\AssetTagAssignmentByNameDTO.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\model\Asset.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\controller\AssetPOController.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\model\AssetMake.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\AssetMakeService.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\AssetService.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\AssetTagService.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\AssetAnalyticsService.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\impl\AssetAssignmentManagementServiceImpl.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\controller\AssetTagAssignmentController.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\repository\AuditLogRepository.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\controller\AuditLogController.java
-C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\InventoryManagementSystem\src\main\java\com\inventory\system\service\impl\AssetServiceImpl.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\impl\AssetPOServiceImpl.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\controller\AuditLogController.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\repository\AssetStatusHistoryRepository.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\UserDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\repository\OSVersionRepository.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\repository\AssetMakeRepository.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\repository\UserRepository.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\config\CorsTestController.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\BulkUpdateResponse.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\repository\AssetRepository.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\config\BasicAuthenticationConfig.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\exception\ErrorResponse.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\VendorService.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\PODeletionWarningDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\controller\AssetTagAssignmentController.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\controller\AssetPOController.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\controller\CustomErrorController.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\impl\OSVersionServiceImpl.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\controller\AssetAssignmentHistoryController.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\mapper\VendorMapper.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\model\AssetType.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\model\OS.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\impl\AssetTagAssignmentServiceImpl.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\impl\AssetTagServiceImpl.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\OSVersionDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\validation\AssetValidationService.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\BulkAssetByPOResponse.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\repository\AssetAnalyticsRepository.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\AssetTagService.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\model\Asset.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\controller\AssetAssignmentManagementController.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\controller\UserController.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetDashboardDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\repository\AssetAssignmentHistoryRepository.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\UserService.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\AssetAnalyticsService.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\impl\AssetStatusHistoryServiceImpl.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\impl\AssetServiceImpl.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetMakeDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\exception\handler\GlobalExceptionHandler.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\controller\OSController.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\validation\AssetRequestValidator.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\controller\AssetTypeController.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\AssetPOService.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\impl\AssetAnalyticsServiceImpl.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetAssignmentHistoryDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\controller\AssetTagController.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\exception\ConflictException.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\repository\AssetTagAssignmentRepository.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\model\User.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetPOUpdateResponse.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\BaseDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\controller\AssetAnalyticsController.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssignmentResponseDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\impl\AssetModelServiceImpl.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\BulkAssetResponse.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\model\BaseEntity.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetModelDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\OSVersionService.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\config\SecurityConfig.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\OSDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetTagAssignmentDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\controller\AssetMakeController.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetTagDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\model\AssetTagAssignment.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\ErrorResponse.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetModelDetailsDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\impl\UserServiceImpl.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetBulkUpdateDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\AssetTypeService.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\PODeletionConflictDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\repository\AssetModelRepository.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\impl\AssetMakeServiceImpl.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\config\WebConfig.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\model\AssetMake.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\POSummaryDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\controller\AssetController.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetPOMigrationResponse.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetUpdateDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\repository\AuditLogRepository.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\mapper\AssetTypeMapper.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\model\AuditLog.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AuditLogDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetIndividualUpdateDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\enums\EntityStatus.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\AssetMakeService.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\impl\OSServiceImpl.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetDeletionBlockerDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\config\ValidationConfig.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\repository\OSRepository.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\AssetTagAssignmentService.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\mapper\AssetPOMapper.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\AuditLogService.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\mapper\AssetMapper.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\BulkAssetByPORequest.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\repository\VendorRepository.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetTypeDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\model\AssetPO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\controller\AssetModelController.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetUserAssignmentDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\model\AssetTag.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\repository\AssetTypeRepository.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\model\AssetStatusHistory.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\repository\AssetTagRepository.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\exception\ResourceNotFoundException.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\model\AssetTagAssignmentId.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\model\Vendor.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\repository\BaseRepository.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\controller\OSVersionController.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\VendorDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\impl\AssetAssignmentHistoryServiceImpl.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetAnalyticsSummaryDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\AssetModelService.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\model\OSVersion.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\controller\VendorController.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\model\AssetModel.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\AssetStatusHistoryService.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetTagAssignmentRequestDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\AssetService.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetRequestDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\model\AssetAssignmentHistory.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\impl\VendorServiceImpl.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\impl\AuditLogServiceImpl.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\impl\AssetAssignmentManagementServiceImpl.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\impl\AssetTypeServiceImpl.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetStatusHistoryDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\AssetAssignmentHistoryService.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetPODTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\InventoryManagementApplication.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\controller\AssetStatusHistoryController.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\AssetAssignmentManagementService.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetTagAssignmentByNameDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\repository\AssetPORepository.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\AssetReportDTO.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\dto\PageResponse.java
+C:\Users\Mahathi\OneDrive - Celcom Solutions\Desktop\Inventory Management Application\backend\src\main\java\com\inventory\system\service\OSService.java

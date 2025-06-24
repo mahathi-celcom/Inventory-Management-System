@@ -49,6 +49,10 @@ public class AssetPOServiceImpl implements AssetPOService {
     public AssetPODTO createAssetPO(AssetPODTO assetPODTO) {
         log.info("Creating new AssetPO with PO Number: {}", assetPODTO.getPoNumber());
         
+        // Validate and normalize acquisition type
+        String normalizedAcquisitionType = validateAndNormalizeAcquisitionType(assetPODTO.getAcquisitionType());
+        assetPODTO.setAcquisitionType(normalizedAcquisitionType);
+        
         // Validate warranty expiry date
         validateWarrantyExpiryDate(assetPODTO.getWarrantyExpiryDate(), assetPODTO.getAcquisitionDate());
         
@@ -67,8 +71,11 @@ public class AssetPOServiceImpl implements AssetPOService {
         AssetPO existingAssetPO = assetPORepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("AssetPO not found with ID: " + id));
         
+        // Validate and normalize acquisition type
+        String normalizedAcquisitionType = validateAndNormalizeAcquisitionType(assetPODTO.getAcquisitionType());
+        
         // Update fields
-        existingAssetPO.setAcquisitionType(assetPODTO.getAcquisitionType());
+        existingAssetPO.setAcquisitionType(normalizedAcquisitionType);
         existingAssetPO.setPoNumber(assetPODTO.getPoNumber());
         existingAssetPO.setInvoiceNumber(assetPODTO.getInvoiceNumber());
         existingAssetPO.setAcquisitionDate(assetPODTO.getAcquisitionDate());
@@ -210,8 +217,11 @@ public class AssetPOServiceImpl implements AssetPOService {
         // === PHASE 2: Update Primary Key in AssetPO ===
         log.info("PHASE 2: Updating AssetPO primary key");
         
+        // Validate and normalize acquisition type
+        String normalizedAcquisitionType = validateAndNormalizeAcquisitionType(assetPODTO.getAcquisitionType());
+        
         // Update the AssetPO with new data
-        existingAssetPO.setAcquisitionType(assetPODTO.getAcquisitionType());
+        existingAssetPO.setAcquisitionType(normalizedAcquisitionType);
         existingAssetPO.setPoNumber(newPoNumber); // This is now safe since FKs are updated
         existingAssetPO.setInvoiceNumber(assetPODTO.getInvoiceNumber());
         existingAssetPO.setAcquisitionDate(assetPODTO.getAcquisitionDate());
@@ -501,10 +511,10 @@ public class AssetPOServiceImpl implements AssetPOService {
     @Override
     @Transactional(readOnly = true)
     public List<AssetPODTO> getLeasesExpiringBetween(LocalDate startDate, LocalDate endDate) {
-        log.info("Fetching leases expiring between: {} and {}", startDate, endDate);
+        log.info("Fetching rentals expiring between: {} and {}", startDate, endDate);
         
-        List<AssetPO> expiringLeases = assetPORepository.findLeasesExpiringBetween(startDate, endDate);
-        return expiringLeases.stream()
+        List<AssetPO> expiringRentals = assetPORepository.findRentalsExpiringBetween(startDate, endDate);
+        return expiringRentals.stream()
                 .map(assetPOMapper::toDTO)
                 .collect(Collectors.toList());
     }
@@ -512,7 +522,7 @@ public class AssetPOServiceImpl implements AssetPOService {
     @Override
     @Transactional(readOnly = true)
     public List<AssetPODTO> getLeasesExpiringSoon(int daysAhead) {
-        log.info("Fetching leases expiring in the next {} days", daysAhead);
+        log.info("Fetching rentals expiring in the next {} days", daysAhead);
         
         LocalDate today = LocalDate.now();
         LocalDate futureDate = today.plusDays(daysAhead);
@@ -894,6 +904,31 @@ public class AssetPOServiceImpl implements AssetPOService {
                 "Warranty expiry date (" + warrantyExpiryDate + 
                 ") seems too far in the past (more than 10 years ago)"
             );
+        }
+    }
+    
+    /**
+     * Validates and normalizes acquisition type - case-insensitive validation
+     * Valid values: "Bought" and "Rented" (case-insensitive)
+     * @param acquisitionType The acquisition type to validate
+     * @return Normalized acquisition type
+     * @throws IllegalArgumentException if validation fails
+     */
+    private String validateAndNormalizeAcquisitionType(String acquisitionType) {
+        if (acquisitionType == null || acquisitionType.trim().isEmpty()) {
+            throw new IllegalArgumentException("Acquisition type is required");
+        }
+        
+        String normalized = acquisitionType.trim();
+        
+        // Case-insensitive validation - only "Bought" and "Rented" are allowed
+        if ("Bought".equalsIgnoreCase(normalized)) {
+            return "Bought";
+        } else if ("Rented".equalsIgnoreCase(normalized)) {
+            return "Rented";
+        } else {
+            throw new IllegalArgumentException("Invalid acquisition type: '" + acquisitionType + 
+                "'. Valid values are: Bought, Rented (case-insensitive)");
         }
     }
 

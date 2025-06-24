@@ -9,6 +9,7 @@ import com.inventory.system.repository.AssetMakeRepository;
 import com.inventory.system.repository.AssetTypeRepository;
 import com.inventory.system.service.AssetMakeService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AssetMakeServiceImpl implements AssetMakeService {
@@ -34,10 +36,25 @@ public class AssetMakeServiceImpl implements AssetMakeService {
     @Override
     @Transactional
     public AssetMakeDTO updateAssetMake(Long id, AssetMakeDTO assetMakeDTO) {
+        log.info("Updating AssetMake with ID: {} - Input DTO: name={}, status={}, typeId={}", 
+                 id, assetMakeDTO.getName(), assetMakeDTO.getStatus(), assetMakeDTO.getTypeId());
+        
         AssetMake assetMake = assetMakeRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("AssetMake", "id", id));
+        
+        log.debug("Found existing AssetMake: id={}, name={}, status={}", 
+                 assetMake.getId(), assetMake.getName(), assetMake.getStatus());
+        
         updateAssetMakeFromDTO(assetMake, assetMakeDTO);
+        
+        log.debug("Updated AssetMake fields: name={}, status={}", 
+                 assetMake.getName(), assetMake.getStatus());
+        
         AssetMake updatedAssetMake = assetMakeRepository.save(assetMake);
+        
+        log.info("AssetMake updated successfully with ID: {} - Final state: name={}, status={}", 
+                updatedAssetMake.getId(), updatedAssetMake.getName(), updatedAssetMake.getStatus());
+        
         return convertToDTO(updatedAssetMake);
     }
 
@@ -129,12 +146,25 @@ public class AssetMakeServiceImpl implements AssetMakeService {
         } else {
             assetMake.setAssetType(null);
         }
+        
+        // Status handling - Valid statuses: Active, Inactive, NotForBuying
+        if (dto.getStatus() != null) {
+            // Validate status
+            if (!isValidStatus(dto.getStatus())) {
+                throw new IllegalArgumentException("Invalid status: " + dto.getStatus() + 
+                    ". Valid statuses are: Active, Inactive, NotForBuying");
+            }
+            assetMake.setStatus(dto.getStatus());
+        } else {
+            assetMake.setStatus("Active");
+        }
     }
 
     private AssetMakeDTO convertToDTO(AssetMake assetMake) {
         AssetMakeDTO dto = new AssetMakeDTO();
         dto.setId(assetMake.getId());
         dto.setName(assetMake.getName());
+        dto.setStatus(assetMake.getStatus());
         dto.setTypeId(assetMake.getAssetType() != null ? assetMake.getAssetType().getId() : null);
         return dto;
     }
@@ -149,5 +179,11 @@ public class AssetMakeServiceImpl implements AssetMakeService {
             page.isLast(),
             page.isFirst()
         );
+    }
+    
+    private boolean isValidStatus(String status) {
+        return "Active".equalsIgnoreCase(status) || 
+               "Inactive".equalsIgnoreCase(status) || 
+               "NotForBuying".equalsIgnoreCase(status);
     }
 } 

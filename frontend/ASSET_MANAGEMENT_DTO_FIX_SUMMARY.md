@@ -108,7 +108,7 @@ Response: {
   "invoiceNumber": "INV-001-2024",
   "acquisitionDate": "2024-01-15",
   "vendorId": 1,
-  "vendorName": "Dell Inc.",
+  "name": "Dell Inc.",
   "ownerType": "Celcom",
   "leaseEndDate": null,
   "rentalAmount": null,

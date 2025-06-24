@@ -159,8 +159,20 @@ public class VendorServiceImpl implements VendorService {
 
     @Override
     public List<VendorDTO> getActiveVendors() {
+        log.info("Repository query: Finding vendors with status 'Active' - DEBUG");
         List<Vendor> vendors = vendorRepository.findByStatusOrderByNameAsc("Active");
-        return vendors.stream().map(this::convertToDTO).toList();
+        log.info("Repository returned {} vendors - DEBUG", vendors.size());
+        
+        // Debug log raw entities
+        vendors.forEach(vendor -> 
+            log.info("Raw Entity - ID: {}, Name: '{}', Status: '{}'", 
+                vendor.getId(), vendor.getName(), vendor.getStatus())
+        );
+        
+        List<VendorDTO> dtoList = vendors.stream().map(this::convertToDTO).toList();
+        log.info("Converted to {} DTOs - DEBUG", dtoList.size());
+        
+        return dtoList;
     }
 
     @Override

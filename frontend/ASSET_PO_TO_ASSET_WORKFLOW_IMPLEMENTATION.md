@@ -72,7 +72,7 @@ Implemented a comprehensive end-to-end workflow that allows users to create Asse
 ### **Enhanced Asset PO Model**
 ```typescript
 export interface AssetPoWithDetails extends AssetPo {
-  vendorName?: string;
+  name?: string;
   createdAssetsCount?: number;      // NEW: Count of created assets
   remainingAssetsCount?: number;    // NEW: Remaining assets to create
   isExpanded?: boolean;             // NEW: Expansion state

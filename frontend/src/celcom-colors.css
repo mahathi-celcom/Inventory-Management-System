@@ -1,0 +1,141 @@
+/* ===== CELCOM SOLUTIONS BRAND COLORS ===== */
+
+:root {
+  /* Primary Celcom Colors */
+  --celcom-primary: #0066cc;        /* Celcom Blue */
+  --celcom-primary-dark: #004499;   /* Darker Blue */
+  --celcom-primary-light: #3388dd;  /* Lighter Blue */
+  
+  /* Secondary Colors */
+  --celcom-secondary: #00cc66;      /* Celcom Green */
+  --celcom-secondary-dark: #009944; /* Darker Green */
+  --celcom-secondary-light: #33dd88; /* Lighter Green */
+  
+  /* Accent Colors */
+  --celcom-accent: #ff6600;         /* Orange Accent */
+  --celcom-accent-light: #ff8833;   /* Light Orange */
+  
+  /* Status Colors */
+  --celcom-success: #00cc66;        /* Green for Active */
+  --celcom-danger: #ff3366;         /* Red for Inactive/Error */
+  --celcom-warning: #ffaa00;        /* Yellow for Warning */
+  --celcom-info: #0066cc;           /* Blue for Info */
+  
+  /* Neutral Colors */
+  --celcom-gray-50: #f8fafc;
+  --celcom-gray-100: #f1f5f9;
+  --celcom-gray-200: #e2e8f0;
+  --celcom-gray-300: #cbd5e1;
+  --celcom-gray-400: #94a3b8;
+  --celcom-gray-500: #64748b;
+  --celcom-gray-600: #475569;
+  --celcom-gray-700: #334155;
+  --celcom-gray-800: #1e293b;
+  --celcom-gray-900: #0f172a;
+}
+
+/* ===== CELCOM UTILITY CLASSES ===== */
+
+/* Background Colors */
+.bg-celcom-primary { background-color: var(--celcom-primary); }
+.bg-celcom-primary-dark { background-color: var(--celcom-primary-dark); }
+.bg-celcom-primary-light { background-color: var(--celcom-primary-light); }
+.bg-celcom-secondary { background-color: var(--celcom-secondary); }
+.bg-celcom-accent { background-color: var(--celcom-accent); }
+.bg-celcom-success { background-color: var(--celcom-success); }
+.bg-celcom-danger { background-color: var(--celcom-danger); }
+
+/* Text Colors */
+.text-celcom-primary { color: var(--celcom-primary); }
+.text-celcom-primary-dark { color: var(--celcom-primary-dark); }
+.text-celcom-secondary { color: var(--celcom-secondary); }
+.text-celcom-accent { color: var(--celcom-accent); }
+.text-celcom-success { color: var(--celcom-success); }
+.text-celcom-danger { color: var(--celcom-danger); }
+.text-celcom-warning { color: var(--celcom-warning); }
+
+/* Border Colors */
+.border-celcom-primary { border-color: var(--celcom-primary); }
+.border-celcom-secondary { border-color: var(--celcom-secondary); }
+.border-celcom-success { border-color: var(--celcom-success); }
+.border-celcom-danger { border-color: var(--celcom-danger); }
+.border-celcom-gray-50 { border-color: var(--celcom-gray-50); }
+.border-celcom-gray-100 { border-color: var(--celcom-gray-100); }
+.border-celcom-gray-200 { border-color: var(--celcom-gray-200); }
+.border-celcom-gray-300 { border-color: var(--celcom-gray-300); }
+.border-celcom-gray-400 { border-color: var(--celcom-gray-400); }
+.border-celcom-gray-500 { border-color: var(--celcom-gray-500); }
+.border-celcom-gray-600 { border-color: var(--celcom-gray-600); }
+.border-celcom-gray-700 { border-color: var(--celcom-gray-700); }
+.border-celcom-gray-800 { border-color: var(--celcom-gray-800); }
+.border-celcom-gray-900 { border-color: var(--celcom-gray-900); }
+
+/* Hover Effects */
+.hover\:bg-celcom-primary:hover { background-color: var(--celcom-primary); }
+.hover\:bg-celcom-primary-dark:hover { background-color: var(--celcom-primary-dark); }
+.hover\:bg-celcom-secondary:hover { background-color: var(--celcom-secondary); }
+.hover\:bg-celcom-secondary-dark:hover { background-color: var(--celcom-secondary-dark); }
+
+/* Additional hover background classes */
+.hover\:bg-celcom-primary-light:hover { background-color: var(--celcom-primary-light); }
+.hover\:bg-celcom-secondary-light:hover { background-color: var(--celcom-secondary-light); }
+.hover\:bg-celcom-accent:hover { background-color: var(--celcom-accent); }
+.hover\:bg-celcom-accent-light:hover { background-color: var(--celcom-accent-light); }
+
+/* Focus Effects */
+.focus\:ring-celcom-primary:focus { 
+  --tw-ring-color: var(--celcom-primary); 
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+.focus\:border-celcom-primary:focus { border-color: var(--celcom-primary); }
+
+/* ===== CELCOM COMPONENT STYLES ===== */
+
+@layer components {
+  /* Buttons */
+  .btn-celcom-primary {
+    @apply bg-celcom-primary hover:bg-celcom-primary-dark text-white font-medium px-4 py-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-celcom-primary focus:ring-offset-2;
+  }
+
+  .btn-celcom-secondary {
+    @apply bg-celcom-secondary hover:bg-celcom-secondary-dark text-white font-medium px-4 py-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-celcom-secondary focus:ring-offset-2;
+  }
+
+  .btn-celcom-outline {
+    @apply border-2 border-celcom-primary text-celcom-primary hover:bg-celcom-primary hover:text-white font-medium px-4 py-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-celcom-primary focus:ring-offset-2;
+  }
+}
+
+/* Input Fields */
+.input-celcom {
+  @apply border border-celcom-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-celcom-primary focus:border-celcom-primary transition-colors duration-200;
+}
+
+/* Cards */
+.card-celcom {
+  @apply bg-white rounded-lg shadow-lg border border-celcom-gray-200 p-6;
+}
+
+/* Status Badges */
+.badge-active {
+  @apply inline-flex px-3 py-1 text-sm font-semibold rounded-full bg-celcom-success bg-opacity-10 text-celcom-success border border-celcom-success border-opacity-20;
+}
+
+.badge-inactive {
+  @apply inline-flex px-3 py-1 text-sm font-semibold rounded-full bg-celcom-danger bg-opacity-10 text-celcom-danger border border-celcom-danger border-opacity-20;
+}
+
+/* Loading Spinners */
+.spinner-celcom {
+  border-color: var(--celcom-gray-200);
+  border-top-color: var(--celcom-primary);
+}
+
+/* ===== RESPONSIVE OVERRIDES ===== */
+@media (max-width: 768px) {
+  .btn-celcom-primary,
+  .btn-celcom-secondary,
+  .btn-celcom-outline {
+    @apply px-3 py-2 text-sm;
+  }
+} 

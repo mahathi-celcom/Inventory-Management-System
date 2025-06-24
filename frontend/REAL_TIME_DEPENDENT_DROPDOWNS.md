@@ -68,7 +68,7 @@ interface AssetModelDetails {
 
 interface VendorWarrantyDetails {
   vendorId: number;
-  vendorName: string;
+  name: string;
   extendedWarrantyVendor: string;
   extendedWarrantyVendorId: number;
   defaultWarrantyMonths: number;

@@ -30,7 +30,7 @@ interface AssetPODTO {
   invoiceNumber?: string;
   acquisitionDate?: string;
   vendorId?: number;
-  vendorName?: string;
+  name?: string;
   ownerType: string;
   leaseEndDate?: string;
   rentalAmount?: number;

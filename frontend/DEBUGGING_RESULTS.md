@@ -14,7 +14,7 @@ Field types: ["id: number (1)", "name: string (Test Vendor)", ...]
 ```
 ❌ CRITICAL: Invalid vendorId mapping for vendor 0:
 originalItem: {name: "Test", contactInfo: "...", status: "Active"}
-mappedVendor: {vendorId: undefined, vendorName: "Test", ...}
+mappedVendor: {vendorId: undefined, name: "Test", ...}
 availableFields: ["name", "contactInfo", "status"]
 vendorIdSource: NONE
 ```
@@ -31,7 +31,7 @@ vendorId: item.id,  // Change from item.vendorId || item.id
 **Fix:** Update field mapping based on console output:
 ```typescript
 vendorId: item.vendorId || item.id || item.vendor_id,
-vendorName: item.name || item.vendorName || item.vendor_name,
+name: item.name || item.name || item.vendor_name,
 ```
 
 ### Issue 3: Proxy not working

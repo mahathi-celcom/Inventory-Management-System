@@ -118,7 +118,7 @@ public class AssetPODTO {
     private String invoiceNumber;
     private LocalDate acquisitionDate;
     private Long vendorId;
-    private String vendorName;
+    private String name;
     @NotBlank 
     @Pattern(regexp = "^(Celcom|Vendor)$") 
     private String ownerType;
@@ -215,7 +215,7 @@ public class AssetPOService {
             .invoiceNumber(po.getInvoiceNumber())
             .acquisitionDate(po.getAcquisitionDate())
             .vendorId(po.getVendorId())
-            .vendorName(vendor != null ? vendor.getVendorName() : null)
+            .name(vendor != null ? vendor.getname() : null)
             .ownerType(po.getOwnerType())
             .leaseEndDate(po.getLeaseEndDate())
             .rentalAmount(po.getRentalAmount())

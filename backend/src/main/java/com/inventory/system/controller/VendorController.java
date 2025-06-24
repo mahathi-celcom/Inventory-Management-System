@@ -71,8 +71,16 @@ public class VendorController {
 
     @GetMapping(value = "/active", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<VendorDTO>> getActiveVendors() {
-        log.debug("Fetching all active vendors");
+        log.info("Fetching all active vendors - DEBUG");
         List<VendorDTO> activeVendors = vendorService.getActiveVendors();
+        log.info("Found {} active vendors - DEBUG", activeVendors.size());
+        
+        // Debug logging for each vendor
+        activeVendors.forEach(vendor -> 
+            log.info("Vendor ID: {}, Name: '{}', Status: '{}'", 
+                vendor.getId(), vendor.getName(), vendor.getStatus())
+        );
+        
         return ResponseEntity.ok(activeVendors);
     }
 

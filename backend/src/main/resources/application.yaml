@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/inventory_db}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:mysecretpassword}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: ${DB_DIALECT:org.hibernate.dialect.PostgreSQLDialect}
+        default_schema: ${DB_SCHEMA:public}
+
+jwt:
+  token:
+    validity: ${TOKEN_VALIDITY:86400000}  # 24 hours in milliseconds
+    prefix: celcom
+  signing:
+    key: signingkey  # Change this to a secure key
+  authorities:
+    key: roles
+  header:
+    string: Authorization

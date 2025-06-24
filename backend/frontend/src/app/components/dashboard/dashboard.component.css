@@ -1,0 +1,377 @@
+/* Dashboard component styles - using Tailwind CSS */ 
+
+/* ✅ Sidebar Layout Styles - NavAdmin Structure with Celcom Colors */
+
+/* Sidebar Container */
+.sidebar {
+  @apply fixed left-0 top-0 h-full bg-white shadow-lg z-50 
+         transition-all duration-300 ease-in-out;
+  width: 280px;
+}
+
+.sidebar-collapsed {
+  width: 64px;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 1024px) {
+  .sidebar {
+    @apply -translate-x-full;
+  }
+  
+  .sidebar:not(.sidebar-collapsed) {
+    @apply translate-x-0;
+  }
+}
+
+/* Sidebar Header */
+.sidebar-header {
+  @apply p-6 border-b border-gray-100;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  @apply text-white;
+}
+
+.sidebar-collapsed .sidebar-header {
+  @apply px-4 py-6;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+  @apply flex-1 py-6 px-4 overflow-y-auto;
+}
+
+.sidebar-link {
+  @apply flex items-center px-3 py-3 mb-2 text-gray-700 rounded-lg 
+         hover:bg-gray-50 hover:text-gray-900 transition-all duration-200 
+         cursor-pointer;
+}
+
+.sidebar-link-active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  @apply text-white shadow-md;
+}
+
+.sidebar-link-active:hover {
+  @apply text-white;
+}
+
+.sidebar-link-disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.sidebar-link-disabled:hover {
+  @apply bg-transparent text-gray-400;
+}
+
+.sidebar-icon {
+  @apply w-5 h-5 flex-shrink-0;
+}
+
+.sidebar-text {
+  @apply ml-3 font-medium;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar-collapsed .sidebar-text {
+  @apply opacity-0;
+}
+
+.sidebar-badge {
+  @apply ml-auto text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full;
+}
+
+.sidebar-collapsed .sidebar-badge {
+  @apply opacity-0;
+}
+
+/* Sidebar Separator */
+.sidebar-separator {
+  @apply h-px bg-gray-200 my-4 mx-3;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  @apply p-4 border-t border-gray-100;
+}
+
+.sidebar-toggle-btn {
+  @apply w-full flex items-center justify-center p-2 text-gray-500 
+         hover:text-gray-700 hover:bg-gray-50 rounded-lg transition-colors;
+}
+
+.sidebar-collapsed .sidebar-toggle-btn svg {
+  @apply rotate-180;
+}
+
+/* Main Content Area */
+.main-content {
+  @apply flex-1 flex flex-col min-h-screen;
+  margin-left: 280px;
+  transition: margin-left 0.3s ease;
+}
+
+.main-content-expanded {
+  margin-left: 64px;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 1024px) {
+  .main-content {
+    @apply ml-0;
+  }
+  
+  .main-content-expanded {
+    @apply ml-0;
+  }
+}
+
+/* Main Header */
+.main-header {
+  @apply bg-white shadow-sm border-b border-gray-100 px-6 py-4;
+}
+
+/* Main Body */
+.main-body {
+  @apply flex-1 p-6 bg-gray-50;
+}
+
+/* Mobile Sidebar Toggle */
+.sidebar-mobile-toggle {
+  @apply p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 
+         rounded-lg transition-colors;
+}
+
+/* Welcome Action Cards */
+.welcome-action-card {
+  @apply block p-6 bg-white rounded-lg shadow-sm border border-gray-200 
+         hover:shadow-md hover:border-gray-300 transition-all duration-200 
+         transform hover:-translate-y-1;
+}
+
+.welcome-action-card:hover {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+/* Sidebar Tooltip for Collapsed State */
+.sidebar-collapsed .sidebar-link {
+  @apply relative;
+}
+
+.sidebar-collapsed .sidebar-link:hover::after {
+  content: attr(data-tooltip);
+  @apply absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-xs 
+         rounded whitespace-nowrap z-50;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Sidebar Backdrop for Mobile */
+.sidebar-backdrop {
+  @apply fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden;
+}
+
+/* Animation Classes */
+.slide-enter {
+  @apply -translate-x-full;
+}
+
+.slide-enter-active {
+  @apply translate-x-0 transition-transform duration-300 ease-out;
+}
+
+.slide-leave {
+  @apply translate-x-0;
+}
+
+.slide-leave-active {
+  @apply -translate-x-full transition-transform duration-300 ease-in;
+}
+
+/* Focus Styles for Accessibility */
+.sidebar-link:focus {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+}
+
+.sidebar-toggle-btn:focus {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+}
+
+/* Scrollbar Styling for Sidebar */
+.sidebar-nav::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-nav::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
+
+/* Additional Dashboard Styles */
+.form-input-sm {
+  @apply px-3 py-2 border border-gray-300 rounded-md text-sm 
+         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+}
+
+.btn-primary {
+  @apply px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white 
+         rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 
+         disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200;
+}
+
+.btn-secondary {
+  @apply px-4 py-2 bg-white border border-gray-300 text-gray-700 
+         rounded-lg font-medium hover:bg-gray-50 hover:border-gray-400
+         disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200;
+}
+
+/* 🎨 Celcom Theme Extensions for Dashboard */
+
+/* Warranty Status Colors */
+.bg-celcom-success-light {
+  background-color: #d1fae5;
+}
+
+.text-celcom-success {
+  color: #059669;
+}
+
+.bg-celcom-danger-light {
+  background-color: #fee2e2;
+}
+
+.text-celcom-danger {
+  color: #dc2626;
+}
+
+.bg-celcom-warning-light {
+  background-color: #fef3c7;
+}
+
+.text-celcom-warning {
+  color: #d97706;
+}
+
+.bg-celcom-primary-light {
+  background-color: #e0e7ff;
+}
+
+/* Department Distribution Table */
+.border-celcom-border {
+  border-color: #e5e7eb;
+}
+
+.border-celcom-primary {
+  border-color: #667eea;
+}
+
+.bg-celcom-light {
+  background-color: #f8fafc;
+}
+
+.text-celcom-text {
+  color: #374151;
+}
+
+.text-celcom-subtitle {
+  color: #6b7280;
+}
+
+.bg-celcom-secondary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Form Controls */
+.form-select-celcom {
+  @apply border border-gray-300 rounded-lg px-3 py-2 text-sm transition-colors duration-200;
+  background-color: white;
+  color: #374151;
+}
+
+.form-select-celcom:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Button Variants */
+.btn-celcom-primary-sm {
+  @apply px-3 py-2 text-sm font-medium text-white rounded-lg transition-all duration-200;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.btn-celcom-primary-sm:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-celcom-primary-sm:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Hover Effects */
+.hover\:bg-celcom-light:hover {
+  background-color: #f8fafc;
+}
+
+.hover\:text-celcom-primary-dark:hover {
+  color: #5b21b6;
+}
+
+/* Status Badges */
+.badge-celcom-success {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+  background-color: #d1fae5;
+  color: #059669;
+}
+
+.badge-celcom-danger {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.badge-celcom-primary {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+/* 📊 Optimized Chart Layout Styles */
+.chart-compact {
+  @apply h-64;
+}
+
+.chart-compact canvas {
+  @apply max-h-full w-full;
+}
+
+/* Responsive chart adjustments */
+@media (max-width: 768px) {
+  .chart-compact {
+    @apply h-48;
+  }
+}
+
+@media (max-width: 640px) {
+  .chart-compact {
+    @apply h-40;
+  }
+}
+
+/* Chart container optimizations */
+.chart-container-optimized {
+  @apply relative overflow-hidden;
+}
+
+.chart-container-optimized .chart-compact {
+  @apply transition-all duration-300 ease-in-out;
+} 

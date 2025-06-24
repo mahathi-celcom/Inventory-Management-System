@@ -1,0 +1,656 @@
+<div class="bg-white rounded-lg shadow-lg">
+  <!-- Form Header -->
+  <div class="px-6 py-4 border-b border-gray-200">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="flex-shrink-0">
+          <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+            @if (config.mode === 'edit') {
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+              </svg>
+            } @else {
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+            }
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold text-gray-900">
+            {{ config.mode === 'edit' ? 'Edit Asset' : 'Create New Asset' }}
+          </h3>
+          <p class="text-sm text-gray-500">
+            {{ config.context === 'po' ? 'Asset linked to PO' : 'General asset management' }}
+          </p>
+        </div>
+      </div>
+      
+      <!-- Form Status Indicator -->
+      <div class="flex items-center space-x-2 text-sm">
+        @if (assetForm.valid) {
+          <div class="flex items-center text-green-600">
+            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+            Form Valid
+          </div>
+        } @else {
+          <div class="flex items-center text-amber-600">
+            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+            </svg>
+            Complete Required Fields
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  @if (loading()) {
+    <div class="flex items-center justify-center py-12">
+      <div class="text-center space-y-4">
+        <div class="relative">
+          <div class="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto"></div>
+        </div>
+        <p class="text-gray-600 font-medium">Loading form data...</p>
+      </div>
+    </div>
+  } @else {
+
+    <!-- Form Content -->
+    <form [formGroup]="assetForm" (ngSubmit)="onSubmit()" class="p-6 space-y-8">
+      
+      <!-- Section 1: Basic Information -->
+      <div class="space-y-6">
+        <div class="flex items-center space-x-3 pb-3 border-b border-gray-200">
+          <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+            <span class="text-sm font-medium text-blue-600">1</span>
+          </div>
+          <div>
+            <h4 class="text-lg font-medium text-gray-900">Basic Information</h4>
+            <p class="text-sm text-gray-500">Essential asset details and identification</p>
+          </div>
+        </div>
+
+        <!-- Row 1: Name, Serial Number, Asset Category -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Asset Name -->
+          <div>
+            <label class="flex items-center text-sm font-medium text-gray-700 mb-2">
+              Asset Name
+              <span class="text-red-500 ml-1">*</span>
+            </label>
+            <input 
+              type="text" 
+              formControlName="name" 
+              placeholder="e.g., Dell Laptop, Microsoft Office License"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200"
+              [class.border-red-300]="getFieldError('name')"
+              [class.border-green-300]="assetForm.get('name')?.valid && assetForm.get('name')?.touched">
+            @if (getFieldError('name')) {
+              <div class="flex items-center mt-2 text-sm text-red-600">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                </svg>
+                {{ getFieldError('name') }}
+              </div>
+            }
+          </div>
+
+          <!-- Serial Number -->
+          <div>
+            <label class="flex items-center text-sm font-medium text-gray-700 mb-2">
+              Serial Number
+              <span class="text-red-500 ml-1">*</span>
+            </label>
+            <input 
+              type="text" 
+              formControlName="serialNumber" 
+              placeholder="e.g., ABC123456789"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200"
+              [class.border-red-300]="getFieldError('serialNumber')"
+              [class.border-green-300]="assetForm.get('serialNumber')?.valid && assetForm.get('serialNumber')?.touched">
+            @if (getFieldError('serialNumber')) {
+              <div class="flex items-center mt-2 text-sm text-red-600">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                </svg>
+                {{ getFieldError('serialNumber') }}
+              </div>
+            }
+          </div>
+
+          <!-- Asset Category -->
+          <div>
+            <label class="flex items-center text-sm font-medium text-gray-700 mb-2">
+              Asset Category
+              <span class="text-red-500 ml-1">*</span>
+            </label>
+            <select 
+              formControlName="assetCategory" 
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200"
+              [class.border-red-300]="getFieldError('assetCategory')">
+              <option value="HARDWARE">Hardware</option>
+              <option value="SOFTWARE">Software</option>
+            </select>
+            @if (getFieldError('assetCategory')) {
+              <div class="flex items-center mt-2 text-sm text-red-600">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                </svg>
+                {{ getFieldError('assetCategory') }}
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Cascading Asset Classification -->
+      <div class="space-y-6">
+        <div class="flex items-center space-x-3 pb-3 border-b border-gray-200">
+          <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+            <span class="text-sm font-medium text-blue-600">2</span>
+          </div>
+          <div>
+            <h4 class="text-lg font-medium text-gray-900">Asset Classification</h4>
+            <p class="text-sm text-gray-500">Type, make, and model information with cascading selection</p>
+          </div>
+        </div>
+
+        <!-- Row 1: Asset Type, Make, Model -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Asset Type -->
+          <div>
+            <label class="flex items-center text-sm font-medium text-gray-700 mb-2">
+              Asset Type
+              <span class="text-red-500 ml-1">*</span>
+            </label>
+            <select 
+              formControlName="assetTypeId" 
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200"
+              [class.border-red-300]="getFieldError('assetTypeId')"
+              [disabled]="typesLoading()">
+              <option value="">{{ typesLoading() ? 'Loading types...' : 'Select Asset Type' }}</option>
+              @for (type of filteredAssetTypes(); track type.id) {
+                <option [value]="type.id">{{ type.assetTypeName || type.name }}</option>
+              }
+            </select>
+            @if (typesLoading()) {
+              <div class="flex items-center mt-2 text-sm text-blue-600">
+                <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Loading types...
+              </div>
+            }
+            @if (getFieldError('assetTypeId')) {
+              <div class="flex items-center mt-2 text-sm text-red-600">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                </svg>
+                {{ getFieldError('assetTypeId') }}
+              </div>
+            }
+          </div>
+
+          <!-- Asset Make -->
+          <div>
+            <label class="flex items-center text-sm font-medium text-gray-700 mb-2">
+              Asset Make
+              <span class="text-red-500 ml-1">*</span>
+            </label>
+            <select 
+              formControlName="makeId" 
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200"
+              [class.border-red-300]="getFieldError('makeId')"
+              [disabled]="makesLoading() || !assetForm.get('assetTypeId')?.value">
+              <option value="">
+                {{ !assetForm.get('assetTypeId')?.value ? 'Select Asset Type first' : 
+                   makesLoading() ? 'Loading makes...' : 'Select Asset Make' }}
+              </option>
+              @for (make of filteredAssetMakes(); track make.id) {
+                <option [value]="make.id">{{ make.name }}</option>
+              }
+            </select>
+            @if (makesLoading()) {
+              <div class="flex items-center mt-2 text-sm text-blue-600">
+                <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Loading makes...
+              </div>
+            }
+            @if (getFieldError('makeId')) {
+              <div class="flex items-center mt-2 text-sm text-red-600">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                </svg>
+                {{ getFieldError('makeId') }}
+              </div>
+            }
+          </div>
+
+          <!-- Asset Model -->
+          <div>
+            <label class="flex items-center text-sm font-medium text-gray-700 mb-2">
+              Asset Model
+              <span class="text-red-500 ml-1">*</span>
+            </label>
+            <select 
+              formControlName="modelId" 
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200"
+              [class.border-red-300]="getFieldError('modelId')"
+              [disabled]="modelsLoading() || !assetForm.get('makeId')?.value">
+              <option value="">
+                {{ !assetForm.get('makeId')?.value ? 'Select Asset Make first' : 
+                   modelsLoading() ? 'Loading models...' : 'Select Asset Model' }}
+              </option>
+              @for (model of filteredAssetModels(); track model.id) {
+                <option [value]="model.id">{{ model.name }}</option>
+              }
+            </select>
+            @if (modelsLoading()) {
+              <div class="flex items-center mt-2 text-sm text-blue-600">
+                <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Loading models...
+              </div>
+            }
+            @if (getFieldError('modelId')) {
+              <div class="flex items-center mt-2 text-sm text-red-600">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                </svg>
+                {{ getFieldError('modelId') }}
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Row 2: Operating System and Version (Optional) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Operating System -->
+          <div>
+            <label class="text-sm font-medium text-gray-700 mb-2 block">Operating System</label>
+            <select 
+              formControlName="osId" 
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200">
+              <option value="">Select Operating System</option>
+              @for (os of operatingSystems(); track os.id) {
+                <option [value]="os.id">{{ os.osType }}</option>
+              }
+            </select>
+          </div>
+
+          <!-- OS Version -->
+          <div>
+            <label class="text-sm font-medium text-gray-700 mb-2 block">OS Version</label>
+            <select 
+              formControlName="osVersionId" 
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200"
+              [disabled]="!assetForm.get('osId')?.value">
+              <option value="">
+                {{ !assetForm.get('osId')?.value ? 'Select OS first' : 'Select OS Version' }}
+              </option>
+              @for (version of filteredOSVersions(); track version.id) {
+                <option [value]="version.id">{{ version.versionNumber }}</option>
+              }
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Category-Specific Details -->
+      <div class="space-y-6">
+        <div class="flex items-center space-x-3 pb-3 border-b border-gray-200">
+          <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+            <span class="text-sm font-medium text-blue-600">3</span>
+          </div>
+          <div>
+            <h4 class="text-lg font-medium text-gray-900">
+              {{ assetForm.get('assetCategory')?.value === 'SOFTWARE' ? 'Software Details' : 'Hardware Details' }}
+            </h4>
+            <p class="text-sm text-gray-500">
+              {{ assetForm.get('assetCategory')?.value === 'SOFTWARE' ? 'License and software information' : 'Physical device specifications' }}
+            </p>
+          </div>
+        </div>
+
+        <!-- Hardware Fields -->
+        @if (showHardwareFields()) {
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Warranty Expiry -->
+            <div>
+              <label class="text-sm font-medium text-gray-700 mb-2 block">Warranty Expiry Date</label>
+              <input 
+                type="date" 
+                formControlName="warrantyExpiry" 
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200">
+            </div>
+          </div>
+        }
+
+        <!-- Software Fields -->
+        @if (showSoftwareFields()) {
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- License Name -->
+            <div>
+              <label class="flex items-center text-sm font-medium text-gray-700 mb-2">
+                License Name
+                <span class="text-red-500 ml-1">*</span>
+              </label>
+              <input 
+                type="text" 
+                formControlName="licenseName" 
+                placeholder="e.g., Office 365 Business Premium"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200"
+                [class.border-red-300]="getFieldError('licenseName')"
+                [class.border-green-300]="assetForm.get('licenseName')?.valid && assetForm.get('licenseName')?.touched">
+              @if (getFieldError('licenseName')) {
+                <div class="flex items-center mt-2 text-sm text-red-600">
+                  <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                  </svg>
+                  {{ getFieldError('licenseName') }}
+                </div>
+              }
+            </div>
+
+            <!-- License Validity Period -->
+            <div>
+              <label class="flex items-center text-sm font-medium text-gray-700 mb-2">
+                License Expiry Date
+                <span class="text-red-500 ml-1">*</span>
+              </label>
+              <input 
+                type="date" 
+                formControlName="licenseValidityPeriod" 
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200"
+                [class.border-red-300]="getFieldError('licenseValidityPeriod')"
+                [class.border-green-300]="assetForm.get('licenseValidityPeriod')?.valid && assetForm.get('licenseValidityPeriod')?.touched">
+              @if (getFieldError('licenseValidityPeriod')) {
+                <div class="flex items-center mt-2 text-sm text-red-600">
+                  <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                  </svg>
+                  {{ getFieldError('licenseValidityPeriod') }}
+                </div>
+              }
+            </div>
+
+
+          </div>
+        }
+      </div>
+
+      <!-- Section 4: Additional Details -->
+      <div class="space-y-6">
+        <div class="flex items-center space-x-3 pb-3 border-b border-gray-200">
+          <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+            <span class="text-sm font-medium text-blue-600">4</span>
+          </div>
+          <div>
+            <h4 class="text-lg font-medium text-gray-900">Additional Details</h4>
+            <p class="text-sm text-gray-500">Asset status, location, and network information</p>
+          </div>
+        </div>
+
+        <!-- Row 1: Status, IT Asset Code, Inventory Location -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Status -->
+          <div>
+            <label class="text-sm font-medium text-gray-700 mb-2 block">Asset Status</label>
+            <select 
+              formControlName="status" 
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200">
+              @for (option of statusOptions(); track option.code) {
+                <option [value]="option.code">{{ option.name }}</option>
+              }
+            </select>
+          </div>
+
+          <!-- IT Asset Code -->
+          <div>
+            <label class="text-sm font-medium text-gray-700 mb-2 block">IT Asset Code</label>
+            <input 
+              type="text" 
+              formControlName="itAssetCode" 
+              placeholder="e.g., IT-2024-001"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200">
+          </div>
+
+          <!-- Inventory Location -->
+          <div>
+            <label class="text-sm font-medium text-gray-700 mb-2 block">Inventory Location</label>
+            <input 
+              type="text" 
+              formControlName="inventoryLocation" 
+              placeholder="e.g., Building A, Floor 3, Room 301"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200">
+          </div>
+        </div>
+
+        <!-- Row 2: MAC Address, IPv4 Address -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- MAC Address -->
+          <div>
+            <label class="text-sm font-medium text-gray-700 mb-2 block">MAC Address</label>
+            <input 
+              type="text" 
+              formControlName="macAddress" 
+              placeholder="e.g., 00:1B:44:11:3A:B7"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200">
+          </div>
+
+          <!-- IPv4 Address -->
+          <div>
+            <label class="text-sm font-medium text-gray-700 mb-2 block">IPv4 Address</label>
+            <input 
+              type="text" 
+              formControlName="ipv4Address" 
+              placeholder="e.g., 192.168.1.100"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200">
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 5: Purchase Order & Assignment -->
+      <div class="space-y-6">
+        <div class="flex items-center space-x-3 pb-3 border-b border-gray-200">
+          <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+            <span class="text-sm font-medium text-blue-600">5</span>
+          </div>
+          <div>
+            <h4 class="text-lg font-medium text-gray-900">Purchase Order & Assignment</h4>
+            <p class="text-sm text-gray-500">Financial tracking and user assignment</p>
+          </div>
+        </div>
+
+        <!-- Row 1: PO Number, User Assignment, Tags -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- PO Number -->
+          <div>
+            <label class="flex items-center text-sm font-medium text-gray-700 mb-2">
+              PO Number
+              @if (config.context === 'po') {
+                <span class="ml-2 text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Pre-selected</span>
+              }
+            </label>
+            <select 
+              formControlName="poNumber" 
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200"
+              [disabled]="!isPONumberEditable()">
+              <option value="">No PO Selected</option>
+              @for (po of purchaseOrders(); track po.poId) {
+                <option [value]="po.poNumber">{{ po.poNumber }} - {{ po.invoiceNumber }}</option>
+              }
+            </select>
+            @if (config.context === 'po') {
+              <p class="mt-1 text-xs text-gray-500">PO Number is pre-selected from the PO module</p>
+            }
+          </div>
+
+          <!-- User Assignment -->
+          <div>
+            <label class="text-sm font-medium text-gray-700 mb-2 block">Assign to User</label>
+            <select 
+              formControlName="currentUserId" 
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200">
+              <option value="">No User Assigned</option>
+              @for (user of users(); track user.id) {
+                <option [value]="user.id">{{ user.fullNameOrOfficeName }} ({{ user.email }})</option>
+              }
+            </select>
+          </div>
+
+          <!-- Tags -->
+          <div>
+            <label class="text-sm font-medium text-gray-700 mb-2 block">Tags</label>
+            <input 
+              type="text" 
+              formControlName="tags" 
+              placeholder="e.g., critical, backup, development"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200">
+            <p class="mt-1 text-xs text-gray-500">Separate multiple tags with commas</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 6: PO Details (Read-only when PO is selected) -->
+      @if (assetForm.get('poNumber')?.value) {
+        <div class="space-y-6">
+          <div class="flex items-center space-x-3 pb-3 border-b border-gray-200">
+            <div class="flex-shrink-0 w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+              <span class="text-sm font-medium text-gray-600">ℹ</span>
+            </div>
+            <div>
+              <h4 class="text-lg font-medium text-gray-900">Purchase Order Details</h4>
+              <p class="text-sm text-gray-500">Information from linked purchase order (read-only)</p>
+            </div>
+          </div>
+
+          <!-- Row 1: Invoice, Acquisition Date, Owner Type -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div>
+              <label class="text-sm font-medium text-gray-700 mb-2 block">Invoice Number</label>
+              <input 
+                type="text" 
+                formControlName="invoiceNumber" 
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm bg-gray-50 text-gray-600"
+                readonly>
+            </div>
+            <div>
+              <label class="text-sm font-medium text-gray-700 mb-2 block">Acquisition Date</label>
+              <input 
+                type="date" 
+                formControlName="acquisitionDate" 
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm bg-gray-50 text-gray-600"
+                readonly>
+            </div>
+            <div>
+              <label class="text-sm font-medium text-gray-700 mb-2 block">Owner Type</label>
+              <input 
+                type="text" 
+                formControlName="ownerType" 
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm bg-gray-50 text-gray-600"
+                readonly>
+            </div>
+          </div>
+
+          <!-- Row 2: Financial Information -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div>
+              <label class="text-sm font-medium text-gray-700 mb-2 block">Acquisition Price</label>
+              <div class="relative">
+                <span class="absolute left-3 top-3 text-gray-500">₹</span>
+                <input 
+                  type="number" 
+                  formControlName="acquisitionPrice" 
+                  class="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm bg-gray-50 text-gray-600"
+                  readonly>
+              </div>
+            </div>
+            <div>
+              <label class="text-sm font-medium text-gray-700 mb-2 block">Current Price</label>
+              <div class="relative">
+                <span class="absolute left-3 top-3 text-gray-500">₹</span>
+                <input 
+                  type="number" 
+                  formControlName="currentPrice" 
+                  class="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm bg-gray-50 text-gray-600"
+                  readonly>
+              </div>
+            </div>
+            <div>
+              <label class="text-sm font-medium text-gray-700 mb-2 block">Rental Amount</label>
+              <div class="relative">
+                <span class="absolute left-3 top-3 text-gray-500">₹</span>
+                <input 
+                  type="number" 
+                  formControlName="rentalAmount" 
+                  class="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm bg-gray-50 text-gray-600"
+                  readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- Form Actions -->
+      <div class="flex items-center justify-between pt-6 border-t border-gray-200">
+        <div class="text-sm text-gray-500">
+          @if (!assetForm.valid) {
+            <span class="flex items-center">
+              <svg class="w-4 h-4 text-amber-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+              </svg>
+              Please complete all required fields
+            </span>
+          } @else {
+            <span class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Ready to {{ config.mode === 'edit' ? 'update' : 'create' }} asset
+            </span>
+          }
+        </div>
+        
+        <div class="flex items-center space-x-3">
+          <button 
+            type="button" 
+            (click)="onCancel()" 
+            class="px-6 py-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors duration-200">
+            Cancel
+          </button>
+          <button 
+            type="submit" 
+            [disabled]="assetForm.invalid || submitting()"
+            class="px-6 py-3 text-sm font-medium text-white bg-orange-500 rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center space-x-2">
+            @if (submitting()) {
+              <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+              <span>{{ config.mode === 'edit' ? 'Updating...' : 'Creating...' }}</span>
+            } @else {
+              @if (config.mode === 'edit') {
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              } @else {
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+              }
+              <span>{{ config.mode === 'edit' ? 'Update Asset' : 'Create Asset' }}</span>
+            }
+          </button>
+        </div>
+      </div>
+    </form>
+  }
+</div> 

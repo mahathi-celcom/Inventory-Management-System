@@ -1,0 +1,713 @@
+<!-- ✅ User Management with Layout Component -->
+<app-layout 
+  pageTitle="User Management"
+  [navigationItems]="navigationItems"
+  (navigationClick)="onNavigationClick($event)">
+  
+  <!-- Header Actions -->
+  <div slot="header-actions" class="flex items-center space-x-4">
+    <!-- Refresh Button -->
+    <button 
+  type="button"
+  (click)="refreshUserList()"
+  class="btn-celcom-outline flex items-center space-x-2"
+  title="Refresh User List">
+  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+    </path>
+  </svg>
+</button>
+
+    <!-- Add User Button -->
+    <button 
+      type="button"
+      (click)="showAddForm()"
+      class="btn-celcom-primary flex items-center space-x-2">
+      <span>+ ADD USER</span>
+    </button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="space-y-6">
+    <!-- Success Message -->
+    <div *ngIf="showSuccessMessage" class="fixed top-4 right-4 z-50 transform transition-all duration-300 ease-in-out">
+      <div class="bg-celcom-success text-white px-6 py-3 rounded-lg shadow-xl border border-celcom-success flex items-center space-x-3">
+        <svg class="h-6 w-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span class="font-medium">{{ successMessage }}</span>
+        <button (click)="showSuccessMessage = false" class="ml-4 text-green-200 hover:text-white focus:outline-none">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="showErrorMessage" class="fixed top-4 right-4 z-50 transform transition-all duration-300 ease-in-out">
+      <div class="bg-celcom-danger text-white px-6 py-3 rounded-lg shadow-xl border border-celcom-danger flex items-center space-x-3">
+        <svg class="h-6 w-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span class="font-medium">{{ errorMessage }}</span>
+        <button (click)="showErrorMessage = false" class="ml-4 text-pink-200 hover:text-white focus:outline-none">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Summary and Filters Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+      <!-- Summary Card -->
+      <div class="lg:col-span-1">
+        <div class="bg-white border border-celcom-gray-200 rounded-xl p-6 shadow-lg">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-lg font-semibold mb-2 text-celcom-gray-800">Total Users</h3>
+              <p class="text-3xl font-bold text-celcom-primary">{{ getTotalUserCount() }}</p>
+            </div>
+            <div class="w-12 h-12 bg-celcom-primary bg-opacity-10 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-celcom-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="mt-4 grid grid-cols-1 gap-2 text-sm">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-2 h-2 bg-celcom-primary rounded-full mr-2"></div>
+                <span class="text-celcom-gray-700">Permanent</span>
+              </div>
+              <span class="font-medium">{{ getPermanentUserCount() }}</span>
+            </div>
+            <div class="flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="w-2 h-2 bg-celcom-accent rounded-full mr-2"></div>
+                <span class="text-celcom-gray-700">Contractors</span>
+              </div>
+              <span class="font-medium">{{ getContractorUserCount() }}</span>
+            </div>
+            <div class="flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="w-2 h-2 bg-celcom-secondary rounded-full mr-2"></div>
+                <span class="text-celcom-gray-700">Office Assets</span>
+              </div>
+              <span class="font-medium">{{ getOfficeAssetUserCount() }}</span>
+            </div>
+          </div>
+        </div>
+    </div>
+
+      <!-- Filters Card -->
+      <div class="lg:col-span-2">
+        <div class="bg-white border border-celcom-gray-200 rounded-xl p-6">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center">
+              <div class="p-2 rounded-lg bg-celcom-primary bg-opacity-10">
+                <svg class="w-5 h-5 text-celcom-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.707A1 1 0 013 7V4z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-celcom-gray-800 ml-3">Filters</h3>
+            </div>
+            <button 
+              (click)="clearUserFilters()" 
+              class="text-sm font-medium text-celcom-primary hover:text-celcom-primary-dark transition-colors px-3 py-1 rounded-md hover:bg-celcom-primary hover:bg-opacity-10">
+              Clear All
+            </button>
+    </div>
+          
+      <form [formGroup]="searchForm" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Search Input -->
+            <div class="form-group">
+              <label class="block text-sm font-medium text-celcom-gray-700 mb-2">Search</label>
+          <input
+            type="text"
+            formControlName="search"
+                placeholder="Search by name, email..."
+                class="w-full px-4 py-3 border border-celcom-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-celcom-primary focus:border-celcom-primary transition-colors duration-200 bg-white shadow-sm">
+        </div>
+
+        <!-- Department Filter -->
+            <div class="form-group">
+              <label class="block text-sm font-medium text-celcom-gray-700 mb-2">Department</label>
+          <input
+            type="text"
+            formControlName="department"
+                placeholder="Enter department..."
+                class="w-full px-4 py-3 border border-celcom-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-celcom-primary focus:border-celcom-primary transition-colors duration-200 bg-white shadow-sm">
+        </div>
+
+        <!-- Status Filter -->
+            <div class="form-group">
+              <label class="block text-sm font-medium text-celcom-gray-700 mb-2">Status</label>
+              <select formControlName="status" class="w-full px-4 py-3 border border-celcom-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-celcom-primary focus:border-celcom-primary transition-colors duration-200 bg-white shadow-sm">
+            <option [value]="USER_STATUS.ALL">All Status</option>
+            <option [value]="USER_STATUS.ACTIVE">Active</option>
+            <option [value]="USER_STATUS.INACTIVE">Inactive</option>
+          </select>
+        </div>
+
+        <!-- User Type Filter -->
+            <div class="form-group">
+              <label class="block text-sm font-medium text-celcom-gray-700 mb-2">User Type</label>
+              <select formControlName="userType" class="w-full px-4 py-3 border border-celcom-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-celcom-primary focus:border-celcom-primary transition-colors duration-200 bg-white shadow-sm">
+            <option [value]="USER_TYPE.ALL">All Types</option>
+                <option [value]="USER_TYPE.PERMANENT">Permanent</option>
+                <option [value]="USER_TYPE.CONTRACTOR">Contractor</option>
+                <option [value]="USER_TYPE.OFFICE_ASSET">Office Asset</option>
+          </select>
+        </div>
+      </form>
+
+          <!-- Extended Filters Row -->
+          <form [formGroup]="searchForm" class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+            <!-- Country Filter -->
+            <div class="form-group">
+              <label class="block text-sm font-medium text-celcom-gray-700 mb-2">Country</label>
+              <input
+                type="text"
+                formControlName="country"
+                placeholder="Enter country..."
+                class="w-full px-4 py-3 border border-celcom-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-celcom-primary focus:border-celcom-primary transition-colors duration-200 bg-white shadow-sm">
+            </div>
+
+            <!-- City Filter -->
+            <div class="form-group">
+              <label class="block text-sm font-medium text-celcom-gray-700 mb-2">City</label>
+              <input
+                type="text"
+                formControlName="city"
+                placeholder="Enter city..."
+                class="w-full px-4 py-3 border border-celcom-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-celcom-primary focus:border-celcom-primary transition-colors duration-200 bg-white shadow-sm">
+            </div>
+
+            <!-- Employee Code Filter -->
+            <div class="form-group">
+              <label class="block text-sm font-medium text-celcom-gray-700 mb-2">Employee Code</label>
+              <input
+                type="text"
+                formControlName="employeeCode"
+                placeholder="Enter employee code..."
+                class="w-full px-4 py-3 border border-celcom-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-celcom-primary focus:border-celcom-primary transition-colors duration-200 bg-white shadow-sm">
+        </div>
+      </form>
+        </div>
+    </div>
+  </div>
+
+  <!-- Users Table Section -->
+  <div class="card-celcom">
+      <div class="px-6 py-4 border-b border-celcom-gray-200 bg-gradient-to-r from-celcom-primary/5 to-celcom-secondary/5">
+      <div class="flex items-center justify-between">
+          <h2 class="text-xl font-semibold text-celcom-gray-800">
+          Users ({{ totalElements }})
+        </h2>
+      </div>
+    </div>
+      <div class="p-0">
+      
+      <!-- Loading State -->
+        <div *ngIf="isTableLoading" class="flex justify-center items-center py-12">
+          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-celcom-primary"></div>
+          <span class="ml-3 text-celcom-gray-600">Loading users...</span>
+      </div>
+
+      <!-- Users Table -->
+        <div *ngIf="!isTableLoading" class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-celcom-gray-200">
+            <thead class="bg-gradient-to-r from-celcom-primary/10 to-celcom-secondary/10">
+            <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-celcom-gray-600 uppercase tracking-wider">Username</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-celcom-gray-600 uppercase tracking-wider">Employee Code</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-celcom-gray-600 uppercase tracking-wider">User Type</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-celcom-gray-600 uppercase tracking-wider">Email</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-celcom-gray-600 uppercase tracking-wider">Department</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-celcom-gray-600 uppercase tracking-wider">Designation</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-celcom-gray-600 uppercase tracking-wider">Location</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-celcom-gray-600 uppercase tracking-wider">Status</th>
+                <th class="px-6 py-3 text-right text-xs font-medium text-celcom-gray-600 uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+            <tbody class="bg-white divide-y divide-celcom-gray-200">
+              <tr *ngFor="let user of paginatedUsers; trackBy: trackByUserId" class="hover:bg-gradient-to-r hover:from-celcom-primary/5 hover:to-celcom-secondary/5 transition-all duration-200">
+              <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm font-medium text-celcom-gray-900">{{ user.fullNameOrOfficeName }}</div>
+              </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-celcom-gray-600">
+                  <span class="font-mono bg-celcom-gray-100 px-2 py-1 rounded text-xs">{{ user.employeeCode }}</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                        [ngClass]="{
+                          'bg-blue-100 text-blue-800 border border-blue-200': user.userType === 'Permanent',
+                          'bg-orange-100 text-orange-800 border border-orange-200': user.userType === 'Contractor',
+                          'bg-green-100 text-green-800 border border-green-200': user.userType === 'OfficeAsset',
+                          'bg-gray-100 text-gray-800 border border-gray-300': !user.userType
+                        }">
+                    <ng-container [ngSwitch]="user.userType">
+                      <span *ngSwitchCase="'Permanent'">Permanent Employee</span>
+                      <span *ngSwitchCase="'Contractor'">Contractor</span>
+                      <span *ngSwitchCase="'OfficeAsset'">Office Asset</span>
+                      <span *ngSwitchDefault>{{ user.userType || 'Unknown' }}</span>
+                    </ng-container>
+                  </span>
+              </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-celcom-gray-600">
+                  <a *ngIf="user.email" [href]="'mailto:' + user.email" class="text-celcom-primary hover:text-celcom-primary-dark transition-colors">
+                  {{ user.email }}
+                </a>
+                  <span *ngIf="!user.email" class="text-celcom-gray-400">-</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-celcom-gray-600">
+                  {{ user.department || '-' }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-celcom-gray-600">
+                  {{ user.designation || '-' }}
+              </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-celcom-gray-600">
+                  <div>{{ user.location || '-' }}</div>
+                  <div *ngIf="user.country || user.city" class="text-xs text-celcom-gray-400">
+                    {{ user.city }}{{ user.city && user.country ? ', ' : '' }}{{ user.country }}
+                  </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                        [ngClass]="{
+                          'bg-green-100 text-green-800 border border-green-200': user.status === 'Active',
+                          'bg-red-100 text-red-800 border border-red-200': user.status === 'Inactive',
+                          'bg-gray-100 text-gray-800 border border-gray-300': user.status !== 'Active' && user.status !== 'Inactive'
+                        }">
+                  {{ user.status }}
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <div class="flex items-center justify-end space-x-2">
+                  <button
+                    (click)="showEditForm(user)"
+                      class="text-celcom-primary hover:text-celcom-primary-dark transition-colors duration-150 p-1 rounded"
+                      title="Edit User">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                    </svg>
+                  </button>
+                  <button
+                    (click)="showDeleteConfirmation(user)"
+                      class="text-celcom-danger hover:text-red-700 transition-colors duration-150 p-1 rounded"
+                      title="Delete User">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+          <!-- Empty State -->
+          <div *ngIf="paginatedUsers.length === 0" class="text-center py-12">
+            <svg class="mx-auto h-12 w-12 text-celcom-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+            </svg>
+            <h3 class="mt-2 text-sm font-medium text-celcom-gray-900">No users found</h3>
+            <p class="mt-1 text-sm text-celcom-gray-500">Try adjusting your search criteria or filters.</p>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div *ngIf="!isTableLoading && totalPages > 1" class="bg-white px-4 py-3 flex items-center justify-between border-t border-celcom-gray-200 sm:px-6">
+          <div class="flex-1 flex justify-between sm:hidden">
+            <button 
+              (click)="onPageChange(currentPage - 1)"
+              [disabled]="currentPage === 0"
+              class="btn-celcom-outline disabled:opacity-50 disabled:cursor-not-allowed">
+              Previous
+            </button>
+            <button 
+              (click)="onPageChange(currentPage + 1)"
+              [disabled]="currentPage >= totalPages - 1"
+              class="btn-celcom-outline disabled:opacity-50 disabled:cursor-not-allowed">
+              Next
+            </button>
+          </div>
+          <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+            <div>
+              <p class="text-sm text-celcom-gray-700">
+                Showing 
+                <span class="font-medium text-celcom-primary">{{ (currentPage * pageSize) + 1 }}</span>
+                to 
+                <span class="font-medium text-celcom-primary">{{ Math.min((currentPage + 1) * pageSize, totalElements) }}</span>
+                of 
+                <span class="font-medium text-celcom-primary">{{ totalElements }}</span>
+                results
+              </p>
+            </div>
+            <div>
+              <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
+              <button
+                (click)="onPageChange(currentPage - 1)"
+                [disabled]="currentPage === 0"
+                  class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-celcom-gray-300 bg-white text-sm font-medium text-celcom-gray-500 hover:bg-celcom-primary hover:bg-opacity-10 disabled:opacity-50 disabled:cursor-not-allowed">
+                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+              </button>
+              
+              <button
+                  *ngFor="let page of getPagesArray(); let i = index"
+                (click)="onPageChange(page)"
+                  [class]="page === currentPage 
+                    ? 'z-10 bg-celcom-primary border-celcom-primary text-white relative inline-flex items-center px-4 py-2 border text-sm font-medium'
+                    : 'bg-white border-celcom-gray-300 text-celcom-gray-500 hover:bg-celcom-primary hover:bg-opacity-10 relative inline-flex items-center px-4 py-2 border text-sm font-medium'">
+                {{ page + 1 }}
+              </button>
+              
+              <button
+                (click)="onPageChange(currentPage + 1)"
+                [disabled]="currentPage >= totalPages - 1"
+                  class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-celcom-gray-300 bg-white text-sm font-medium text-celcom-gray-500 hover:bg-celcom-primary hover:bg-opacity-10 disabled:opacity-50 disabled:cursor-not-allowed">
+                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+              </button>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- User Form Modal with Blurry Background -->
+    <div *ngIf="isFormVisible" class="fixed inset-0 bg-white bg-opacity-20 backdrop-blur-md overflow-y-auto h-full w-full z-50">
+      <div class="relative top-10 mx-auto p-5 border w-11/12 max-w-6xl shadow-xl rounded-xl bg-white">
+        <div class="mt-3">
+    <!-- Modal Header -->
+          <div class="flex items-center justify-between pb-4 mb-6 border-b border-celcom-gray-200">
+            <h3 class="text-2xl font-semibold text-celcom-primary">
+        {{ isEditMode ? 'Edit User' : 'Add New User' }}
+      </h3>
+            <button 
+              (click)="hideForm()" 
+              class="text-celcom-gray-400 hover:text-celcom-gray-600 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+    </div>
+
+          <!-- User Form -->
+          <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="space-y-8">
+        
+            <!-- Dynamic User Type Selection - More Horizontal Layout -->
+            <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl border border-blue-200">
+              <h4 class="text-lg font-semibold text-blue-700 mb-6">User Type Selection</h4>
+              
+              <!-- Horizontal Layout for User Type Selection -->
+              <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+                
+                <!-- User Category Selection -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-3">User Category</label>
+                  <div class="space-y-2">
+                    <label class="flex items-center cursor-pointer p-3 rounded-lg border hover:bg-blue-50 transition-colors"
+                           [class.bg-blue-100]="selectedUserCategory === 'Employee'"
+                           [class.border-blue-300]="selectedUserCategory === 'Employee'"
+                           [class.border-gray-200]="selectedUserCategory !== 'Employee'">
+              <input
+                type="radio"
+                        [value]="'Employee'" 
+                        [checked]="selectedUserCategory === 'Employee'"
+                        (change)="onUserCategoryChange('Employee')"
+                        class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                      <span class="ml-3 text-sm font-medium text-gray-700">👤 Employee</span>
+            </label>
+                    <label class="flex items-center cursor-pointer p-3 rounded-lg border hover:bg-green-50 transition-colors"
+                           [class.bg-green-100]="selectedUserCategory === 'Office Asset'"
+                           [class.border-green-300]="selectedUserCategory === 'Office Asset'"
+                           [class.border-gray-200]="selectedUserCategory !== 'Office Asset'">
+              <input
+                type="radio"
+                        [value]="'Office Asset'" 
+                        [checked]="selectedUserCategory === 'Office Asset'"
+                        (change)="onUserCategoryChange('Office Asset')"
+                        class="form-radio h-4 w-4 text-green-600 border-gray-300 focus:ring-green-500">
+                      <span class="ml-3 text-sm font-medium text-gray-700">🏢 Office Asset</span>
+            </label>
+          </div>
+                </div>
+
+                <!-- Employee Type Selection (shown only for Employee category) -->
+                <div *ngIf="selectedUserCategory === 'Employee'">
+                  <label class="block text-sm font-medium text-gray-700 mb-3">Employee Type</label>
+                  <select 
+                    [value]="selectedEmployeeType"
+                    (change)="onEmployeeTypeChange($any($event.target).value)"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-white">
+                    <option value="Permanent">Permanent Employee</option>
+                    <option value="Contractor">Contractor</option>
+                  </select>
+                </div>
+
+                <!-- User Type Summary with Fixed Visibility -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-3">Selected Type</label>
+                  <div class="p-4 bg-white rounded-xl border border-gray-200 shadow-sm">
+                    <div class="flex items-center space-x-2">
+                      <span class="text-sm text-gray-600">Type:</span>
+                      <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium"
+                            [ngClass]="{
+                              'bg-blue-100 text-blue-800 border border-blue-200': getFinalUserType() === 'Permanent',
+                              'bg-orange-100 text-orange-800 border border-orange-200': getFinalUserType() === 'Contractor',
+                              'bg-green-100 text-green-800 border border-green-200': getFinalUserType() === 'OfficeAsset'
+                            }">
+                        <ng-container [ngSwitch]="getFinalUserType()">
+                          <span *ngSwitchCase="'Permanent'">👤 Permanent Employee</span>
+                          <span *ngSwitchCase="'Contractor'">🤝 Contractor</span>
+                          <span *ngSwitchCase="'OfficeAsset'">🏢 Office Asset</span>
+                          <span *ngSwitchDefault>{{ getFinalUserType() }}</span>
+                        </ng-container>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Fields Grid - Enhanced Horizontal Layout -->
+            <div class="space-y-6">
+              <!-- Primary Information Row -->
+              <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                <h5 class="text-md font-semibold text-gray-800 mb-4 flex items-center">
+                  <span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm mr-2">1</span>
+                  Primary Information
+                </h5>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              
+                  <!-- Full Name/Office Name -->
+                  <div class="form-group">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                      {{ selectedUserCategory === 'Office Asset' ? 'Office Name' : 'Full Name' }}
+                      <span class="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      formControlName="fullNameOrOfficeName"
+                      [placeholder]="selectedUserCategory === 'Office Asset' ? 'Enter office name...' : 'Enter full name...'"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-white"
+                      [class.border-red-500]="hasFieldError('fullNameOrOfficeName')"
+                      [class.focus:ring-red-500]="hasFieldError('fullNameOrOfficeName')">
+                    <p *ngIf="hasFieldError('fullNameOrOfficeName')" class="mt-1 text-sm text-red-500">
+                      {{ getFieldError('fullNameOrOfficeName') }}
+          </p>
+        </div>
+
+                  <!-- Employee Code -->
+                  <div class="form-group">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                      Employee Code
+                      <span *ngIf="selectedUserCategory !== 'Office Asset'" class="text-red-500">*</span>
+                      <span *ngIf="selectedUserCategory === 'Office Asset'" class="text-gray-400 text-xs">(Not applicable)</span>
+            </label>
+            <input
+              type="text"
+                      formControlName="employeeCode"
+                      [placeholder]="selectedUserCategory === 'Office Asset' ? 'Not applicable for Office Assets' : 'Enter employee code...'"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                      [class.bg-gray-100]="selectedUserCategory === 'Office Asset'"
+                      [class.text-gray-500]="selectedUserCategory === 'Office Asset'"
+                      [class.cursor-not-allowed]="selectedUserCategory === 'Office Asset'"
+                      [class.bg-white]="selectedUserCategory !== 'Office Asset'"
+                      [class.border-red-500]="hasFieldError('employeeCode')"
+                      [class.focus:ring-red-500]="hasFieldError('employeeCode')">
+                    <p *ngIf="hasFieldError('employeeCode')" class="mt-1 text-sm text-red-500">
+                      {{ getFieldError('employeeCode') }}
+                    </p>
+            </div>
+
+                  <!-- Email (conditional) -->
+                  <div class="form-group">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                      Email
+                      <span *ngIf="isEmailRequired()" class="text-red-500">*</span>
+                      <span *ngIf="!isEmailRequired()" class="text-gray-400 text-xs">(Optional)</span>
+                    </label>
+                    <input
+                      type="email"
+                      formControlName="email"
+                      placeholder="Enter email address..."
+                      class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-white"
+                      [class.border-red-500]="hasFieldError('email')"
+                      [class.focus:ring-red-500]="hasFieldError('email')">
+                    <p *ngIf="hasFieldError('email')" class="mt-1 text-sm text-red-500">
+                      {{ getFieldError('email') }}
+                    </p>
+          </div>
+
+          <!-- Department -->
+                  <div class="form-group">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Department</label>
+            <input
+              type="text"
+              formControlName="department"
+                      placeholder="Enter department..."
+                      class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-white"
+                      [class.border-red-500]="hasFieldError('department')"
+                      [class.focus:ring-red-500]="hasFieldError('department')">
+                    <p *ngIf="hasFieldError('department')" class="mt-1 text-sm text-red-500">
+              {{ getFieldError('department') }}
+                    </p>
+                  </div>
+            </div>
+          </div>
+
+              <!-- Secondary Information Row -->
+              <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                <h5 class="text-md font-semibold text-gray-800 mb-4 flex items-center">
+                  <span class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-sm mr-2">2</span>
+                  Additional Details
+                </h5>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                  
+                  <!-- Designation -->
+                  <div class="form-group">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Designation</label>
+            <input
+              type="text"
+              formControlName="designation"
+                      placeholder="Enter designation..."
+                      class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-white">
+          </div>
+
+                  <!-- Country -->
+                  <div class="form-group">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Country</label>
+                    <input
+                      type="text"
+                      formControlName="country"
+                      placeholder="Enter country..."
+                      class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-white">
+            </div>
+
+                  <!-- City -->
+                  <div class="form-group">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">City</label>
+                    <input
+                      type="text"
+                      formControlName="city"
+                      placeholder="Enter city..."
+                      class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-white">
+          </div>
+
+          <!-- Location -->
+                  <div class="form-group">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
+            <input
+              type="text"
+              formControlName="location"
+                      placeholder="Enter location..."
+                      class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-white">
+                  </div>
+
+          <!-- Status -->
+                  <div class="form-group">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                      Status
+                      <span class="text-red-500">*</span>
+                    </label>
+            <select
+              formControlName="status"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-white">
+              <option [value]="USER_STATUS.ACTIVE">Active</option>
+              <option [value]="USER_STATUS.INACTIVE">Inactive</option>
+            </select>
+                  </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+            <div class="bg-gray-50 px-6 py-4 rounded-xl">
+              <div class="flex items-center justify-between">
+                <div class="text-sm text-gray-600">
+                  <span class="font-medium">{{ userForm.valid ? '✅' : '⚠️' }}</span>
+                  Form {{ userForm.valid ? 'is valid' : 'has errors' }}
+                </div>
+                <div class="flex items-center space-x-4">
+          <button
+            type="button"
+            (click)="hideForm()"
+                    class="px-6 py-3 border border-gray-300 rounded-xl text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors duration-200 font-medium">
+            Cancel
+          </button>
+          <button
+            type="submit"
+                    [disabled]="isFormSubmitting || userForm.invalid"
+                    class="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-medium">
+                    <span *ngIf="isFormSubmitting" class="inline-flex items-center">
+                      <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      {{ isEditMode ? 'Updating...' : 'Creating...' }}
+                    </span>
+                    <span *ngIf="!isFormSubmitting">
+                      {{ isEditMode ? '💾 Update User' : '➕ Create User' }}
+            </span>
+          </button>
+        </div>
+              </div>
+            </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+    <div *ngIf="deleteUserId" class="fixed inset-0 bg-white bg-opacity-20 backdrop-blur-md overflow-y-auto h-full w-full z-50">
+      <div class="relative top-20 mx-auto p-5 border w-96 shadow-xl rounded-xl bg-white">
+        <div class="mt-3 text-center">
+          <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-celcom-danger bg-opacity-10">
+            <svg class="h-6 w-6 text-celcom-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+            </svg>
+    </div>
+          <h3 class="text-lg font-medium text-celcom-gray-900 mt-2">Delete User</h3>
+          <div class="mt-2 px-7 py-3">
+            <p class="text-sm text-celcom-gray-600">
+              Are you sure you want to delete 
+              <span class="font-medium text-celcom-primary">{{ getUserToDelete()?.fullNameOrOfficeName }}</span>?
+              This action cannot be undone.
+        </p>
+      </div>
+          <div class="items-center px-4 py-3">
+            <div class="flex space-x-3">
+        <button
+          (click)="cancelDelete()"
+                class="btn-celcom-outline w-full">
+          Cancel
+        </button>
+        <button
+          (click)="confirmDelete()"
+          [disabled]="isDeleting"
+                class="px-4 py-2 bg-celcom-danger text-white text-base font-medium rounded-lg w-full shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-celcom-danger disabled:opacity-50 disabled:cursor-not-allowed">
+                <span *ngIf="isDeleting" class="inline-flex items-center">
+                  <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Deleting...
+          </span>
+                <span *ngIf="!isDeleting">Delete</span>
+        </button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</app-layout> 

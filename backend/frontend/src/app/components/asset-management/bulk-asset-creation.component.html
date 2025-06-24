@@ -1,0 +1,460 @@
+<div class="bulk-asset-creation-container">
+  <div class="header-section">
+    <h2 class="page-title">Bulk Asset Creation</h2>
+    <p class="page-description">Create multiple assets at once using dynamic forms</p>
+  </div>
+
+  <!-- Success/Error Messages -->
+  <div *ngIf="showSuccessMessage" class="alert alert-success">
+    <div class="alert-content">
+      <i class="icon-check-circle"></i>
+      <span>{{ successMessage }}</span>
+    </div>
+  </div>
+
+  <div *ngIf="showErrorMessage" class="alert alert-error">
+    <div class="alert-content">
+      <i class="icon-alert-circle"></i>
+      <span>{{ errorMessage }}</span>
+    </div>
+  </div>
+
+  <form [formGroup]="bulkAssetForm" (ngSubmit)="onSubmit()" class="bulk-asset-form">
+    
+    <!-- Form Controls -->
+    <div class="form-controls">
+      <button 
+        type="button" 
+        (click)="addAssetForm()" 
+        class="btn btn-secondary"
+        [disabled]="isSubmitting">
+        <i class="icon-plus"></i>
+        Add Asset
+      </button>
+      
+      <button 
+        type="button" 
+        (click)="addAssetForms(5)" 
+        class="btn btn-secondary"
+        [disabled]="isSubmitting">
+        <i class="icon-plus"></i>
+        Add 5 Assets
+      </button>
+      
+      <span class="asset-count">
+        Total Assets: {{ assetsFormArray.length }}
+      </span>
+    </div>
+
+    <!-- Dynamic Asset Forms using FormArray -->
+    <div formArrayName="assets" class="asset-forms-container">
+      
+      <div 
+        *ngFor="let assetForm of assetsFormArray.controls; let i = index" 
+        [formGroupName]="i" 
+        class="asset-form-card">
+        
+        <!-- Card Header -->
+        <div class="card-header">
+          <h3 class="card-title">Asset {{ i + 1 }}</h3>
+          <button 
+            type="button" 
+            (click)="removeAssetForm(i)" 
+            class="btn btn-danger btn-sm"
+            [disabled]="isSubmitting || assetsFormArray.length <= 1">
+            <i class="icon-trash"></i>
+            Remove
+          </button>
+        </div>
+
+        <!-- Asset Form Fields -->
+        <div class="card-content">
+          <div class="form-grid">
+            
+            <!-- Basic Information -->
+            <div class="form-section">
+              <h4 class="section-title">Basic Information</h4>
+              
+              <div class="form-group">
+                <label for="name-{{i}}" class="form-label required">Asset Name</label>
+                <input 
+                  id="name-{{i}}"
+                  type="text" 
+                  formControlName="name" 
+                  class="form-input"
+                  [class.error]="hasAssetFieldError(i, 'name')"
+                  placeholder="Enter asset name">
+                <div *ngIf="hasAssetFieldError(i, 'name')" class="error-message">
+                  {{ getAssetFieldError(i, 'name') }}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="serialNumber-{{i}}" class="form-label required">Serial Number</label>
+                <input 
+                  id="serialNumber-{{i}}"
+                  type="text" 
+                  formControlName="serialNumber" 
+                  class="form-input"
+                  [class.error]="hasAssetFieldError(i, 'serialNumber')"
+                  placeholder="Enter serial number">
+                <div *ngIf="hasAssetFieldError(i, 'serialNumber')" class="error-message">
+                  {{ getAssetFieldError(i, 'serialNumber') }}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="itAssetCode-{{i}}" class="form-label">IT Asset Code</label>
+                <input 
+                  id="itAssetCode-{{i}}"
+                  type="text" 
+                  formControlName="itAssetCode" 
+                  class="form-input"
+                  placeholder="Enter IT asset code">
+              </div>
+            </div>
+
+            <!-- Asset Classification -->
+            <div class="form-section">
+              <h4 class="section-title">Asset Classification</h4>
+              
+              <div class="form-group">
+                <label for="typeId-{{i}}" class="form-label">Asset Type</label>
+                <select 
+                  id="typeId-{{i}}"
+                  formControlName="typeId" 
+                  class="form-select">
+                  <option value="">Select asset type</option>
+                  <option *ngFor="let type of assetTypes" [value]="type.id">
+                    {{ type.name }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="makeId-{{i}}" class="form-label">Make</label>
+                <select 
+                  id="makeId-{{i}}"
+                  formControlName="makeId" 
+                  class="form-select">
+                  <option value="">Select make</option>
+                  <option *ngFor="let make of assetMakes" [value]="make.id">
+                    {{ make.name }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="modelId-{{i}}" class="form-label">Model</label>
+                <select 
+                  id="modelId-{{i}}"
+                  formControlName="modelId" 
+                  class="form-select">
+                  <option value="">Select model</option>
+                  <option *ngFor="let model of assetModels" [value]="model.id">
+                    {{ model.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Network Information -->
+            <div class="form-section">
+              <h4 class="section-title">Network Information</h4>
+              
+              <div class="form-group">
+                <label for="macAddress-{{i}}" class="form-label">MAC Address</label>
+                <input 
+                  id="macAddress-{{i}}"
+                  type="text" 
+                  formControlName="macAddress" 
+                  class="form-input"
+                  [class.error]="hasAssetFieldError(i, 'macAddress')"
+                  placeholder="XX:XX:XX:XX:XX:XX">
+                <div *ngIf="hasAssetFieldError(i, 'macAddress')" class="error-message">
+                  {{ getAssetFieldError(i, 'macAddress') }}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="ipv4Address-{{i}}" class="form-label">IPv4 Address</label>
+                <input 
+                  id="ipv4Address-{{i}}"
+                  type="text" 
+                  formControlName="ipv4Address" 
+                  class="form-input"
+                  [class.error]="hasAssetFieldError(i, 'ipv4Address')"
+                  placeholder="192.168.1.1">
+                <div *ngIf="hasAssetFieldError(i, 'ipv4Address')" class="error-message">
+                  {{ getAssetFieldError(i, 'ipv4Address') }}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inventoryLocation-{{i}}" class="form-label">Inventory Location</label>
+                <input 
+                  id="inventoryLocation-{{i}}"
+                  type="text" 
+                  formControlName="inventoryLocation" 
+                  class="form-input"
+                  placeholder="Enter location">
+              </div>
+            </div>
+
+            <!-- Status & Ownership -->
+            <div class="form-section">
+              <h4 class="section-title">Status & Ownership</h4>
+              
+              <div class="form-group">
+                <label for="status-{{i}}" class="form-label required">Status</label>
+                <select 
+                  id="status-{{i}}"
+                  formControlName="status" 
+                  class="form-select"
+                  [class.error]="hasAssetFieldError(i, 'status')">
+                                        <option *ngFor="let status of statusOptions" [value]="status.code">
+                        {{ status.name }}
+                      </option>
+                </select>
+                <div *ngIf="hasAssetFieldError(i, 'status')" class="error-message">
+                  {{ getAssetFieldError(i, 'status') }}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="ownerType-{{i}}" class="form-label required">Owner Type</label>
+                <select 
+                  id="ownerType-{{i}}"
+                  formControlName="ownerType" 
+                  class="form-select"
+                  [class.error]="hasAssetFieldError(i, 'ownerType')">
+                                        <option *ngFor="let type of ownerTypeOptions" [value]="type.code">
+                        {{ type.name }}
+                      </option>
+                </select>
+                <div *ngIf="hasAssetFieldError(i, 'ownerType')" class="error-message">
+                  {{ getAssetFieldError(i, 'ownerType') }}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="acquisitionType-{{i}}" class="form-label required">Acquisition Type</label>
+                <select 
+                  id="acquisitionType-{{i}}"
+                  formControlName="acquisitionType" 
+                  class="form-select"
+                  [class.error]="hasAssetFieldError(i, 'acquisitionType')">
+                                        <option *ngFor="let type of acquisitionTypeOptions" [value]="type.code">
+                        {{ type.name }}
+                      </option>
+                </select>
+                <div *ngIf="hasAssetFieldError(i, 'acquisitionType')" class="error-message">
+                  {{ getAssetFieldError(i, 'acquisitionType') }}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="currentUserId-{{i}}" class="form-label">Assigned User</label>
+                <select 
+                  id="currentUserId-{{i}}"
+                  formControlName="currentUserId" 
+                  class="form-select">
+                  <option value="">Select user</option>
+                  <option *ngFor="let user of users" [value]="user.id">
+                    {{ user.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Operating System -->
+            <div class="form-section">
+              <h4 class="section-title">Operating System</h4>
+              
+              <div class="form-group">
+                <label for="osId-{{i}}" class="form-label">Operating System</label>
+                <select 
+                  id="osId-{{i}}"
+                  formControlName="osId" 
+                  class="form-select">
+                  <option value="">Select OS</option>
+                  <option *ngFor="let os of operatingSystems" [value]="os.id">
+                    {{ os.name }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="osVersionId-{{i}}" class="form-label">OS Version</label>
+                <select 
+                  id="osVersionId-{{i}}"
+                  formControlName="osVersionId" 
+                  class="form-select">
+                  <option value="">Select version</option>
+                  <option *ngFor="let version of osVersions" [value]="version.id">
+                    {{ version.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Purchase Information -->
+            <div class="form-section">
+              <h4 class="section-title">Purchase Information</h4>
+              
+              <div class="form-group">
+                <label for="poNumber-{{i}}" class="form-label">PO Number</label>
+                <input 
+                  id="poNumber-{{i}}"
+                  type="text" 
+                  formControlName="poNumber" 
+                  class="form-input"
+                  placeholder="Enter PO number">
+              </div>
+
+              <div class="form-group">
+                <label for="invoiceNumber-{{i}}" class="form-label">Invoice Number</label>
+                <input 
+                  id="invoiceNumber-{{i}}"
+                  type="text" 
+                  formControlName="invoiceNumber" 
+                  class="form-input"
+                  placeholder="Enter invoice number">
+              </div>
+
+              <div class="form-group">
+                <label for="acquisitionDate-{{i}}" class="form-label">Acquisition Date</label>
+                <input 
+                  id="acquisitionDate-{{i}}"
+                  type="date" 
+                  formControlName="acquisitionDate" 
+                  class="form-input">
+              </div>
+
+              <div class="form-group">
+                <label for="vendorId-{{i}}" class="form-label">Vendor</label>
+                <select 
+                  id="vendorId-{{i}}"
+                  formControlName="vendorId" 
+                  class="form-select">
+                  <option value="">Select vendor</option>
+                  <option *ngFor="let vendor of vendors" [value]="vendor.name">
+                    {{ vendor.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Financial Information -->
+            <div class="form-section">
+              <h4 class="section-title">Financial Information</h4>
+              
+              <div class="form-group">
+                <label for="acquisitionPrice-{{i}}" class="form-label">Acquisition Price</label>
+                <input 
+                  id="acquisitionPrice-{{i}}"
+                  type="number" 
+                  step="0.01"
+                  formControlName="acquisitionPrice" 
+                  class="form-input"
+                  [class.error]="hasAssetFieldError(i, 'acquisitionPrice')"
+                  placeholder="0.00">
+                <div *ngIf="hasAssetFieldError(i, 'acquisitionPrice')" class="error-message">
+                  {{ getAssetFieldError(i, 'acquisitionPrice') }}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="depreciationPct-{{i}}" class="form-label">Depreciation %</label>
+                <input 
+                  id="depreciationPct-{{i}}"
+                  type="number" 
+                  min="0" 
+                  max="100"
+                  formControlName="depreciationPct" 
+                  class="form-input"
+                  [class.error]="hasAssetFieldError(i, 'depreciationPct')"
+                  placeholder="0">
+                <div *ngIf="hasAssetFieldError(i, 'depreciationPct')" class="error-message">
+                  {{ getAssetFieldError(i, 'depreciationPct') }}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="currentPrice-{{i}}" class="form-label">Current Price</label>
+                <input 
+                  id="currentPrice-{{i}}"
+                  type="number" 
+                  step="0.01"
+                  formControlName="currentPrice" 
+                  class="form-input"
+                  [class.error]="hasAssetFieldError(i, 'currentPrice')"
+                  placeholder="0.00">
+                <div *ngIf="hasAssetFieldError(i, 'currentPrice')" class="error-message">
+                  {{ getAssetFieldError(i, 'currentPrice') }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="form-section full-width">
+              <h4 class="section-title">Additional Information</h4>
+              
+              <div class="form-group">
+                <label for="tags-{{i}}" class="form-label">Tags</label>
+                <input 
+                  id="tags-{{i}}"
+                  type="text" 
+                  formControlName="tags" 
+                  class="form-input"
+                  placeholder="Enter tags (comma-separated)">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <button 
+        type="button" 
+        (click)="resetForm()" 
+        class="btn btn-secondary"
+        [disabled]="isSubmitting">
+        <i class="icon-refresh"></i>
+        Reset Form
+      </button>
+      
+      <button 
+        type="submit" 
+        class="btn btn-primary"
+        [disabled]="isSubmitting || bulkAssetForm.invalid || assetsFormArray.length === 0">
+        <span *ngIf="isSubmitting" class="loading-spinner"></span>
+        <i *ngIf="!isSubmitting" class="icon-save"></i>
+        {{ isSubmitting ? 'Creating Assets...' : 'Create All Assets' }}
+      </button>
+    </div>
+  </form>
+
+  <!-- Form Summary -->
+  <div class="form-summary" *ngIf="assetsFormArray.length > 0">
+    <h3>Form Summary</h3>
+    <div class="summary-stats">
+      <div class="stat-item">
+        <span class="stat-label">Total Assets:</span>
+        <span class="stat-value">{{ assetsFormArray.length }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Valid Forms:</span>
+        <span class="stat-value">{{ assetsFormArray.controls.length - (bulkAssetForm.invalid ? 1 : 0) }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Invalid Forms:</span>
+        <span class="stat-value error">{{ bulkAssetForm.invalid ? 1 : 0 }}</span>
+      </div>
+    </div>
+  </div>
+
+</div> 
